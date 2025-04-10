@@ -11,4 +11,5 @@ func UserRoutes(e *echo.Echo){
 
 	userRoutes:=e.Group("/user")
 	userRoutes.POST("/create",controllers.CreateUser)
+	userRoutes.POST("/login",controllers.LoginUser)
 }

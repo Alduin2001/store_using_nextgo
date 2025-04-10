@@ -4,6 +4,7 @@ import (
 	customstructs "backend/custom_structs"
 	"backend/database"
 	"backend/models"
+	"backend/utils"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -27,12 +28,12 @@ func CreateUser(c echo.Context) error{
 		})
 	}
 	user.Password = string(hashed)
-	if err:=database.Db.Create(&user);err!=nil{
+	result:=database.Db.Create(&user)
+	if result.Error!=nil{
 		return c.JSON(http.StatusBadRequest,map[string]string{
 			"message":"Не удалось добавить пользователя",
 		})
 	}
-
 
 	return c.JSON(http.StatusCreated,map[string]string{
 		"message":"Пользователь создан",
@@ -41,11 +42,46 @@ func CreateUser(c echo.Context) error{
 
 func LoginUser(c echo.Context) error{
 	var user models.User
+	var foundUser models.User
+	var payload customstructs.Payload
+	if err:=c.Bind(&user);err!=nil{
+		return c.JSON(http.StatusBadRequest,map[string]string{
+			"message":"Не удалось парсить",
+		})
+	}
+	result:=database.Db.Model(&models.User{}).Where("email = ?",user.Email).First(&foundUser)
+	if result.Error!=nil{
+		return c.JSON(http.StatusBadRequest,map[string]interface{}{
+			"message":"Error",
+		})
+	}
+	err:=bcrypt.CompareHashAndPassword([]byte(foundUser.Password),[]byte(user.Password))
+	if err!=nil{
+		return c.JSON(http.StatusOK,map[string]string{
+			"message":"Проверку не прошёл",
+		})
+	}
+	payload.Id = int(foundUser.ID)
+	payload.Role = foundUser.Role
 
+	jwt,err := utils.GenerateToken(&payload)
+	if err!=nil{
+		return c.JSON(http.StatusBadRequest,map[string]string{
+			"message":"Не удалось сгенерировать токен",
+		})
+	}
+	cookie := utils.SetJWTCookie(jwt)
+
+	c.SetCookie(&cookie)
 	return c.JSON(http.StatusOK,map[string]interface{}{
-		"message":user,
+		"payload":jwt,
+		"role":payload.Role,
 	})
 }
+
+// func GetProfile(c echo.Context) error{
+	
+// }
 
 func GetUsers(c echo.Context) error{
 	var user_data []customstructs.UsersData
