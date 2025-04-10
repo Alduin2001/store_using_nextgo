@@ -7,6 +7,8 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
+
+
 func GenerateToken(payload *customstructs.Payload)  (string,error){
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256,jwt.MapClaims{
 		"id":payload.Id,
