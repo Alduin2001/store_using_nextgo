@@ -1,12 +1,14 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Link from "next/link";
 import { FC } from "react";
+import { Container } from "../Container";
 
 
 export const Header:FC = ()=>{
 
     return(
-        <header className="flex flex-wrap justify-between items-center gap-2 shadow-2xl p-2 min-[300px]:text-xs md:text-sm lg:text-lg">
+        <header className="shadow-2xl p-2 min-[300px]:text-xs md:text-sm lg:text-lg">
+            <Container className="flex flex-wrap justify-between items-center gap-2">
             <Link href="/">Logo</Link>
             <nav className="flex gap-2 text-[#eee]">
                 <Menu>
@@ -25,6 +27,7 @@ export const Header:FC = ()=>{
                     </MenuItems>
                 </Menu>
             </nav>
+            </Container>
         </header>
     )
 }

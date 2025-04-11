@@ -4,7 +4,8 @@ import { FC } from "react";
 export const Row: FC<GridProps> = ({ children, className, gap, min }) => {
   return (
     <div
-      className={`w-full grid grid-cols-[repeat(auto-fit,minmax(${min},1fr))] gap-${gap} ${
+    style={{gridTemplateColumns:`repeat(auto-fit,minmax(${min},1fr))`}}
+      className={`w-full grid gap-${gap} ${
         className ? className : ""
       }`}
     >
