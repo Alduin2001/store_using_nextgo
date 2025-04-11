@@ -28,3 +28,29 @@ func CreateCategory(c echo.Context)  error{
 		"message":"Категория добавлена",
 	})
 }
+
+func GetCategories(c echo.Context) error{
+	var categories models.Category
+
+	database.Db.Find(&categories)
+
+	return c.JSON(http.StatusOK,map[string]interface{}{
+		"categories":categories,
+	})
+}
+
+func UpdateCategory(c echo.Context) error{
+	id:=c.Param("id")
+
+	return c.JSON(http.StatusOK,map[string]string{
+		"ud":id,
+	})
+}
+
+func DeleteCategory(c echo.Context) error{
+	id:=c.Param("id")
+
+	return c.JSON(http.StatusOK,map[string]string{
+		"id":id,
+	})
+}
