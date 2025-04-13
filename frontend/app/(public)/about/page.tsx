@@ -1,6 +1,6 @@
-import { Card } from "@/components/card/Card";
-import { Container } from "@/components/Container";
-import { TypoGraphy } from "@/components/typography/TypoGraphy";
+import { Card } from "@/components/ui/card/Card";
+import { Container } from "@/components/ui/Container";
+import { TypoGraphy } from "@/components/ui/typography/TypoGraphy";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

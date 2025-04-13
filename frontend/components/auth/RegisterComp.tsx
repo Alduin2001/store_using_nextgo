@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { userRegisterSchema } from "@/configs/validation/user-valid.schema";
 import { Button, Field, Input, Label } from "@headlessui/react";
-import { Row } from "../grid/Row";
+import { Row } from "../ui/grid/Row";
 import { CreateUserDto } from "@/interfaces/dto/user.dto";
 import { useUserStore } from "@/store/UserStore";
 

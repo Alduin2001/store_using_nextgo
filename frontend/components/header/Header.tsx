@@ -1,7 +1,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Link from "next/link";
 import { FC } from "react";
-import { Container } from "../Container";
+import { Container } from "../ui/Container";
 
 
 export const Header:FC = ()=>{

@@ -1,9 +1,9 @@
-import { Card } from "@/components/card/Card";
-import { Container } from "@/components/Container";
-import { TypoGraphy } from "@/components/typography/TypoGraphy";
+import { Card } from "@/components/ui/card/Card";
+import { Container } from "@/components/ui/Container";
+import { TypoGraphy } from "@/components/ui/typography/TypoGraphy";
 import Image from "next/image";
 import macbook from '@/public/macbook.webp';
-import { Row } from "@/components/grid/Row";
+import { Row } from "@/components/ui/grid/Row";
 import { Button } from "@headlessui/react";
 import Link from "next/link";
 

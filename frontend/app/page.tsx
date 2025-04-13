@@ -1,6 +1,6 @@
-import { Container } from "@/components/Container";
+import { Container } from "@/components/ui/Container";
 import { Metadata } from "next";
-import { TypoGraphy } from "@/components/typography/TypoGraphy";
+import { TypoGraphy } from "@/components/ui/typography/TypoGraphy";
 import Link from "next/link";
 
 export const metadata: Metadata = {

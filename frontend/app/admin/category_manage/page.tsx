@@ -1,6 +1,6 @@
 import { AddCategory } from "@/components/category/AddCategory";
-import { Container } from "@/components/Container";
-import { TypoGraphy } from "@/components/typography/TypoGraphy";
+import { Container } from "@/components/ui/Container";
+import { TypoGraphy } from "@/components/ui/typography/TypoGraphy";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Metadata } from "next";
 

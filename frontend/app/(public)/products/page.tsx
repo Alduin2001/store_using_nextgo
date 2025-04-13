@@ -1,10 +1,10 @@
-import { Card } from "@/components/card/Card";
-import { CardBody } from "@/components/card/CardBody";
-import { CardFooter } from "@/components/card/CardFooter";
-import { CardHeader } from "@/components/card/CardHeader";
-import { Container } from "@/components/Container";
-import { Row } from "@/components/grid/Row";
-import { TypoGraphy } from "@/components/typography/TypoGraphy";
+import { Card } from "@/components/ui/card/Card";
+import { CardBody } from "@/components/ui/card/CardBody";
+import { CardFooter } from "@/components/ui/card/CardFooter";
+import { CardHeader } from "@/components/ui/card/CardHeader";
+import { Container } from "@/components/ui/Container";
+import { Row } from "@/components/ui/grid/Row";
+import { TypoGraphy } from "@/components/ui/typography/TypoGraphy";
 import { Metadata } from "next";
 import Link from "next/link";
 import macbook from '@/public/macbook.webp';

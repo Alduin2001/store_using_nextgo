@@ -1,5 +1,5 @@
 import { RegisterComp } from "@/components/auth/RegisterComp";
-import { Container } from "@/components/Container";
+import { Container } from "@/components/ui/Container";
 import { Metadata } from "next";
 
 

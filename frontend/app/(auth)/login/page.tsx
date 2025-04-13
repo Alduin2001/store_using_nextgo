@@ -1,5 +1,5 @@
 import { LoginComp } from "@/components/auth/LoginComp";
-import { Container } from "@/components/Container";
+import { Container } from "@/components/ui/Container";
 import { Metadata } from "next";
 
 export const metadata:Metadata = {

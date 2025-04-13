@@ -1,7 +1,7 @@
 'use client'
 import { Button, Field, Input, Label, Select } from "@headlessui/react";
 import { FC } from "react";
-import { Row } from "../grid/Row";
+import { Row } from "../ui/grid/Row";
 
 
 export const SearchProducts:FC = ()=>{
