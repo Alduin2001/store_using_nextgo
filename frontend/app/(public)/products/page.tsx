@@ -9,6 +9,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import macbook from '@/public/macbook.webp';
 import Image from "next/image";
+import { SearchProducts } from "@/components/forms/SearchProduct";
 
 export const metadata: Metadata = {
   title: "Товары",
@@ -25,9 +26,15 @@ export default function Products() {
   return (
     <Container>
       <TypoGraphy className="mt-2" Tag="h1" size="2xl" bold position="center">Наши товары</TypoGraphy>
-      <Row min="300px" gap={2}>
+      <div className="flex gap-2 flex-wrap">
+        <Card>
+          <TypoGraphy Tag="h1" size="2xl" position="center" bold italic>Поиск</TypoGraphy>
+          <SearchProducts/>
+        </Card>
+        <div className="flex-1 w-full">
+        <Row gap={2} min="300px">
         {products.map((product) => (
-          <Card key={product.id} bordered className="shadow-md hover:shadow-lg">
+          <Card width="full" key={product.id} bordered className="shadow-md hover:shadow-lg">
             <CardHeader>
               <TypoGraphy Tag="h2" position="center" size="2xl" bold>{product.name}</TypoGraphy>
             </CardHeader>
@@ -41,7 +48,9 @@ export default function Products() {
             </CardFooter>
           </Card>
         ))}
-      </Row>
+        </Row>
+        </div>
+      </div>
     </Container>
   );
 }
