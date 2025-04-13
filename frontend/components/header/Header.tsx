@@ -26,6 +26,20 @@ export const Header:FC = ()=>{
                         <MenuItem as={Link} href="/login" className="bg-amber-500 p-2 text-[#eee] transition hover:bg-amber-400 rounded cursor-pointer">Вход</MenuItem>
                     </MenuItems>
                 </Menu>
+                <Menu>
+                    <MenuButton className="bg-amber-500 p-2 rounded cursor-pointer">Личный кабинет</MenuButton>
+                    <MenuItems anchor="bottom start" className="flex flex-col">
+                        <MenuItem as={Link} href="/register" className="bg-amber-500 p-2 text-[#eee] transition hover:bg-amber-400 rounded cursor-pointer">Регистрация</MenuItem>
+                        <MenuItem as={Link} href="/login" className="bg-amber-500 p-2 text-[#eee] transition hover:bg-amber-400 rounded cursor-pointer">Вход</MenuItem>
+                    </MenuItems>
+                </Menu>
+                <Menu>
+                    <MenuButton className="bg-amber-500 p-2 rounded cursor-pointer">Администрирование</MenuButton>
+                    <MenuItems anchor="bottom start" className="flex flex-col">
+                        <MenuItem as={Link} href="/admin/category_manage" className="bg-amber-500 p-2 text-[#eee] transition hover:bg-amber-400 rounded cursor-pointer">Управление категориями</MenuItem>
+                        <MenuItem as={Link} href="/login" className="bg-amber-500 p-2 text-[#eee] transition hover:bg-amber-400 rounded cursor-pointer">Вход</MenuItem>
+                    </MenuItems>
+                </Menu>
             </nav>
             </Container>
         </header>

@@ -13,7 +13,7 @@ import (
 func main(){
 	e := echo.New()
 	database.InitDB()
-	if err:=database.Db.AutoMigrate(&models.User{});err!=nil{
+	if err:=database.Db.AutoMigrate(&models.User{},&models.Category{});err!=nil{
 		fmt.Println("Ошибка")
 	}
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
@@ -22,6 +22,7 @@ func main(){
 		AllowCredentials: true,
 	}))
 	routes.UserRoutes(e)
+	routes.CategoryRoutes(e)
 
 	e.Start(":8000")
 }

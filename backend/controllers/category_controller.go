@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	customstructs "backend/custom_structs"
 	"backend/database"
 	"backend/models"
 	"net/http"
@@ -30,12 +31,18 @@ func CreateCategory(c echo.Context)  error{
 }
 
 func GetCategories(c echo.Context) error{
-	var categories models.Category
-
+	var categories []models.Category
+	var categoriesResp []customstructs.CategoryResponse
+	
 	database.Db.Find(&categories)
-
+	for _,category := range categories{
+		categoriesResp = append(categoriesResp, customstructs.CategoryResponse{
+			Id: int(category.ID),
+			Name: category.Name,
+		})
+	}
 	return c.JSON(http.StatusOK,map[string]interface{}{
-		"categories":categories,
+		"categories":categoriesResp,
 	})
 }
 
@@ -49,7 +56,7 @@ func UpdateCategory(c echo.Context) error{
 
 func DeleteCategory(c echo.Context) error{
 	id:=c.Param("id")
-
+	
 	return c.JSON(http.StatusOK,map[string]string{
 		"id":id,
 	})
