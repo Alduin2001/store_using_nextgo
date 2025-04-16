@@ -1,0 +1,26 @@
+ROLE
+POST http://localhost:3005/role
+BODY:
+{
+    "name":"пользователь"
+}
+{
+    "name":"админ"
+}
+
+CATEGORY
+POST http://localhost:3005/category
+BODY:
+{
+    "name":"ноутбуки"
+}
+{
+    "name":"планшеты"
+}
+{
+    "name":"телефоны"
+}
+{
+    "name":"часы"
+}
+GET http://localhost:3005/category

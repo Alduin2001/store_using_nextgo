@@ -7,8 +7,8 @@ import { Row } from "@/components/ui/grid/Row";
 import { Button } from "@headlessui/react";
 import Link from "next/link";
 
-export default async function Product({ params }: { params: { id: string } }) {
-  const { id } = params; // Исправлено, так как params уже объект
+export default async function Product({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params; // Исправлено, так как params уже объект
 
   // Данные о продукте (в реальном приложении их следует получать из базы данных или API)
   const productData = {

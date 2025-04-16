@@ -7,8 +7,10 @@ import { Button, Field, Input, Label } from "@headlessui/react";
 import { Row } from "../ui/grid/Row";
 import { LoginUserDto } from "@/interfaces/dto/user.dto";
 import { useUserStore } from "@/store/UserStore";
+import { useRouter } from "next/navigation";
 
 export const LoginComp:FC = ()=>{
+    const router = useRouter();
     const {loginUser} = useUserStore();
     const {register,handleSubmit,reset,formState:{errors,isValid}} = useForm<LoginUserDto>({
         resolver:yupResolver(userLoginSchema),
@@ -16,7 +18,10 @@ export const LoginComp:FC = ()=>{
     })
     const submitForm = async (data:LoginUserDto)=>{
         console.log(data);
-        await loginUser(data);
+        await loginUser(data)
+        .then(()=>{
+            router.push('/private/profile');
+        });
     }
     return(
         <form className="w-full" onSubmit={handleSubmit(submitForm)}>

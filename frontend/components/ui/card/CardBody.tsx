@@ -1,4 +1,4 @@
-import { CardProps } from "@/interfaces/CardProps";
+import { CardProps } from "@/interfaces/components/CardProps";
 import { FC } from "react";
 
 

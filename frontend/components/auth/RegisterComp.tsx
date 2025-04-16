@@ -7,15 +7,20 @@ import { Button, Field, Input, Label } from "@headlessui/react";
 import { Row } from "../ui/grid/Row";
 import { CreateUserDto } from "@/interfaces/dto/user.dto";
 import { useUserStore } from "@/store/UserStore";
+import { useRouter } from "next/navigation";
 
 export const RegisterComp:FC = ()=>{
+    const router = useRouter();
     const {registerUser} = useUserStore();
     const {register,handleSubmit,reset,formState:{errors}} = useForm<CreateUserDto>({
         resolver:yupResolver(userRegisterSchema),
         mode:'all'
     })
     const submitForm = async (data:CreateUserDto)=>{
-        await registerUser(data);
+        await registerUser(data)
+        .then(()=>{
+            router.push('/login');
+        });
     }
     return(
         <form className="w-full" onSubmit={handleSubmit(submitForm)}>

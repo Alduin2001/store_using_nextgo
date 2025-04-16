@@ -1,15 +1,10 @@
 import { AddCategory } from "@/components/category/AddCategory";
+import { Categories } from "@/components/category/Categories";
 import { Container } from "@/components/ui/Container";
 import { TypoGraphy } from "@/components/ui/typography/TypoGraphy";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { Metadata } from "next";
 
-
-export const metadata:Metadata = {
-    title:"Управление категориями"
-}
 export default function Category(){
-
     return(
         <Container className="mt-5">
             <TypoGraphy Tag="h1" size="2xl" position="center">Управление категориями</TypoGraphy>
@@ -26,7 +21,9 @@ export default function Category(){
                         <AddCategory/>
                     </Container>
                 </TabPanel>
-                <TabPanel className="animate-fade-in">Content 2</TabPanel>
+                <TabPanel className="animate-fade-in">
+                    <Categories/>
+                </TabPanel>
             </TabPanels>
             </TabGroup>
             </Container>

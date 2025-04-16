@@ -1,4 +1,4 @@
-import { ChildrenProps } from "@/interfaces/ChildrenProps";
+import { ChildrenProps } from "@/interfaces/components/ChildrenProps";
 import { FC } from "react";
 
 

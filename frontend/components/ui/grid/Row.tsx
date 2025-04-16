@@ -1,4 +1,4 @@
-import { GridProps } from "@/interfaces/GridProps";
+import { GridProps } from "@/interfaces/components/GridProps";
 import { FC } from "react";
 
 export const Row: FC<GridProps> = ({ children, className, gap, min }) => {
