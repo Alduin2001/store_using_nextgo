@@ -5,7 +5,7 @@ export const useProductStore = create((set)=>({
     products:[],
     selectedId:0,
 
-    addProduct:async ()=>{
+    addProduct:async (data:FormData)=>{
 
     },
     getProducts:async ()=>{

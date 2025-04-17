@@ -4,7 +4,7 @@ import { IsNumber, IsString } from "class-validator";
 export class CreateProductDto {
     @Type(()=>Number)
     @IsNumber()
-    category:number
+    categoryId:number
     @IsString()
     name:string
     @IsString()
@@ -12,4 +12,7 @@ export class CreateProductDto {
     @Type(()=>Number)
     @IsNumber()
     price:number
+    @Type(()=>Number)
+    @IsNumber()
+    count:number
 }

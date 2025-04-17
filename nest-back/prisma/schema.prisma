@@ -45,6 +45,7 @@ model Product{
   description String
   price Int
   categoryId Int
+  count Int
   // Связи
   category Category @relation(fields: [categoryId],references: [id],onDelete: Cascade)
   images Images[]

@@ -15,13 +15,14 @@ export const LoginComp:FC = ()=>{
     const {register,handleSubmit,reset,formState:{errors,isValid}} = useForm<LoginUserDto>({
         resolver:yupResolver(userLoginSchema),
         mode:'all'
-    })
+    });
     const submitForm = async (data:LoginUserDto)=>{
         console.log(data);
         await loginUser(data)
         .then(()=>{
             router.push('/private/profile');
-        });
+        })
+        .catch((err)=>console.log(err));
     }
     return(
         <form className="w-full" onSubmit={handleSubmit(submitForm)}>

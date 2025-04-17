@@ -1,3 +1,4 @@
+import { AddProduct } from "@/components/products/AddProduct";
 import { Container } from "@/components/ui/Container";
 import { TypoGraphy } from "@/components/ui/typography/TypoGraphy";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
@@ -16,7 +17,7 @@ export default function ProductManage(){
                 <TabPanel className="animate-fade-in">
                     <Container>
                         <TypoGraphy Tag="h1" size="2xl" position="center">Заполните форму</TypoGraphy>
-                        
+                        <AddProduct/>
                     </Container>
                 </TabPanel>
                 <TabPanel className="animate-fade-in">
