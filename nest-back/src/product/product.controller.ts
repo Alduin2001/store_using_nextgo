@@ -18,7 +18,7 @@ export class ProductController {
   // @UseGuards(AuthGuard('jwt'),RolesGuard)
   @UseInterceptors(FilesInterceptor('images'))
   @Post()
-  create(@Body(new ValidationPipe()) createProductDto: CreateProductDto,@Req() req:UserI,@UploadedFiles() files:Express.Multer.File[]) {
+  create(@Body(new ValidationPipe({transform:true})) createProductDto: CreateProductDto,@Req() req:UserI,@UploadedFiles() files:Express.Multer.File[]) {
     console.log(files[0].filename);
     return this.productService.create(createProductDto,files);
   }

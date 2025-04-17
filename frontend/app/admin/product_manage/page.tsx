@@ -1,4 +1,5 @@
 import { AddProduct } from "@/components/products/AddProduct";
+import { ProductsComp } from "@/components/products/Products";
 import { Container } from "@/components/ui/Container";
 import { TypoGraphy } from "@/components/ui/typography/TypoGraphy";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
@@ -21,7 +22,7 @@ export default function ProductManage(){
                     </Container>
                 </TabPanel>
                 <TabPanel className="animate-fade-in">
-                    
+                    <ProductsComp/>
                 </TabPanel>
             </TabPanels>
             </TabGroup>

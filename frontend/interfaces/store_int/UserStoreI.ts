@@ -4,7 +4,7 @@ export interface UserStoreI{
     isAuth:boolean,
     role:number,
     registerUser:(data:CreateUserDto)=>Promise<void>,
-    loginUser:(data:LoginUserDto)=>Promise<void>,
+    loginUser:(data:LoginUserDto)=>Promise<any>,
     setIsAuth:(state:boolean)=>void,
     checkAuth:()=>Promise<void>,
     getProfile:()=>Promise<any>,

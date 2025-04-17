@@ -8,11 +8,14 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './config/jwt.strategy';
 import { RoleModule } from './role/role.module';
-import { MulterModule } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath:join(__dirname,'..','uploads')
+    }),
     ConfigModule.forRoot({isGlobal:true}),
     PassportModule.register({defaultStrategy:'jwt'}),
     JwtModule.registerAsync({

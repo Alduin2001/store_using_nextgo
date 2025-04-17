@@ -8,6 +8,7 @@ import { Row } from "../ui/grid/Row";
 import { LoginUserDto } from "@/interfaces/dto/user.dto";
 import { useUserStore } from "@/store/UserStore";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export const LoginComp:FC = ()=>{
     const router = useRouter();
@@ -17,12 +18,13 @@ export const LoginComp:FC = ()=>{
         mode:'all'
     });
     const submitForm = async (data:LoginUserDto)=>{
-        console.log(data);
-        await loginUser(data)
-        .then(()=>{
+        const response = await loginUser(data);
+        if(response?.status>=200 && response?.status<300){
             router.push('/private/profile');
-        })
-        .catch((err)=>console.log(err));
+        }else{
+            toast('Не удалось выполнить вход');
+        }
+        
     }
     return(
         <form className="w-full" onSubmit={handleSubmit(submitForm)}>

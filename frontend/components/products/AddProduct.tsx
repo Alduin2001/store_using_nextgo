@@ -10,13 +10,25 @@ import {useForm} from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { productValidSchema } from "@/configs/validation/product-valid.schema";
 import { CreateProductDto } from "@/interfaces/dto/product.dto";
+import { useEffect } from "react";
+import { useCategoryStore } from "@/store/CategoryStore";
+import { useProductStore } from "@/store/ProductStore";
 
 export const AddProduct: FC = () => {
+    const {getCategories,categories} = useCategoryStore();
+    const {addProduct} = useProductStore();
+    useEffect(()=>{
+        async function fetchCategories(){
+            await getCategories();
+        }
+        fetchCategories();
+    },[]);
     const [filesDrop, setFilesDrop] = useState([]);
     const {register,handleSubmit,reset,formState:{errors}} = useForm({
         resolver:yupResolver(productValidSchema),
         mode:'all'
     })
+    
     const onDrop = useCallback((accepted: any) => {
         setFilesDrop(accepted);
     }, []);
@@ -44,15 +56,19 @@ export const AddProduct: FC = () => {
         formData.append('description',data.description);
         formData.append('price',data.price.toString());
         formData.append('count',data.count.toString());
-        reset();
+        console.log(formData);
+        await addProduct(formData)
+        .then(()=>{
+            setFilesDrop([]);
+            reset()
+        });
     }
     return (
         <form onSubmit={handleSubmit(submitForm)} className="w-full p-2 shadow-2xl mt-5" encType="multipart/form-data">
             <Field className="my-2">
                 <Select className="w-full p-2 shadow rounded-md" {...register('categoryId')}>
                     <option disabled>Выберите категорию</option>
-                    <option value={1}>Ноутбуки</option>
-                    <option value={1}>Планшеты</option>
+                    {categories.map((el,i)=><option key={i} value={el.id}>{el.name}</option>)}
                 </Select>
                 {errors.categoryId?.message && (<p className="text-red-600 italic">*{errors.categoryId.message}</p>)}
             </Field>

@@ -10,7 +10,14 @@ export class ProductService {
   ){}
   async create(createProductDto: CreateProductDto,files:Express.Multer.File[]) {
     try {
-      const product = await this.prisma.product.create({data:{...createProductDto}});
+      const {categoryId,name,description,price,count} = createProductDto;
+      const product = await this.prisma.product.create({data:{
+        categoryId:categoryId,
+        name,
+        description,
+        price:price,
+        count:count
+      }});
       if(!product){
         throw new InternalServerErrorException('Ошибка на сервере');
       }
@@ -28,6 +35,28 @@ export class ProductService {
   }
 
   async findAll() {
+    try {
+      const products = await this.prisma.product.findMany({
+        where:{
+          count:{
+            gt:0
+          }
+        },
+        include:{
+          category:true,
+          images:true
+        }
+      });
+      if(!products){
+        throw new InternalServerErrorException('Не удалось найти данные');
+      }
+      return {products};
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
+
+  async findAllForAdmin() {
     try {
       const products = await this.prisma.product.findMany({
         include:{

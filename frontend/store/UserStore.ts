@@ -22,6 +22,7 @@ export const useUserStore = create<UserStoreI>((set)=>({
         if(response.status>=200 && response.status<300){
             set({isAuth:true,role:response.data.role})
         }
+        return response;
     },
     checkAuth:async ()=>{
         const response = await UserAPI.checkAuth();
