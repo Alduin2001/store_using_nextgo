@@ -18,9 +18,14 @@ export const ProductsComp:FC = ()=>{
     return(
         <Container>
             <h1>Товары</h1>
+            {
+                products.length>0 ?
             <Row min="200px" gap={2}>
                 {products.map((el,i)=><ProductItem key={i} {...el} />)}
             </Row>
+            : 
+            <h1 className="text-red-600 italic">Товаров нет</h1>
+}
         </Container>
     )
 }

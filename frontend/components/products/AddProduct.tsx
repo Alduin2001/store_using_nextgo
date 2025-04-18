@@ -13,6 +13,7 @@ import { CreateProductDto } from "@/interfaces/dto/product.dto";
 import { useEffect } from "react";
 import { useCategoryStore } from "@/store/CategoryStore";
 import { useProductStore } from "@/store/ProductStore";
+import { toast } from "react-toastify";
 
 export const AddProduct: FC = () => {
     const {getCategories,categories} = useCategoryStore();
@@ -57,11 +58,15 @@ export const AddProduct: FC = () => {
         formData.append('price',data.price.toString());
         formData.append('count',data.count.toString());
         console.log(formData);
-        await addProduct(formData)
-        .then(()=>{
+        const response = await addProduct(formData);
+        if(response.status>=200 && response.status<300){
+            toast.success('Товар успешно добавлен');
             setFilesDrop([]);
-            reset()
-        });
+            reset();
+        }else{
+            toast.error('Не удалось добавить товар');
+        }
+            
     }
     return (
         <form onSubmit={handleSubmit(submitForm)} className="w-full p-2 shadow-2xl mt-5" encType="multipart/form-data">
@@ -83,7 +88,7 @@ export const AddProduct: FC = () => {
                 {errors.description?.message && (<p className="text-red-600 italic">*{errors.description?.message}</p>)}
             </Field>
             <Field className="flex flex-col gap-2">
-                <Label>Цена товара</Label>
+                <Label>Цена товара (рубли)</Label>
                 <Input {...register('price')} className="outline-none border-b-2 border-green-600" type="number" />
                 {errors.price?.message && (<p className="text-red-600 italic">{errors.price.message}</p>)}
             </Field>

@@ -7,15 +7,14 @@ import { Roles } from 'src/guards/roles.decorator';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'src/guards/roles.guard';
 import { UserI } from 'src/interfaces/UserI';
-import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  // @Roles(Role.Admin)
-  // @UseGuards(AuthGuard('jwt'),RolesGuard)
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard('jwt'),RolesGuard)
   @UseInterceptors(FilesInterceptor('images'))
   @Post()
   create(@Body(new ValidationPipe({transform:true})) createProductDto: CreateProductDto,@Req() req:UserI,@UploadedFiles() files:Express.Multer.File[]) {
@@ -23,9 +22,16 @@ export class ProductController {
     return this.productService.create(createProductDto,files);
   }
 
-  @Get()
+  @Get('/forUser')
   findAll() {
     return this.productService.findAll();
+  }
+
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard('jwt'),RolesGuard)
+  @Get('/forAdmin')
+  findAllForAdmin() {
+    return this.productService.findAllForAdmin();
   }
 
   @Get(':id')
@@ -37,7 +43,7 @@ export class ProductController {
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
     return this.productService.update(+id, updateProductDto);
   }
-
+  
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.productService.remove(+id);

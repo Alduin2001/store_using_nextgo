@@ -12,7 +12,7 @@ export default class ProductAPI{
     }
     static async get():Promise<any>{
         try {
-            const response = await apiClient.get('/product');
+            const response = await apiClient.get('/product/forUser');
             return response;
         } catch (error) {
             return error;

@@ -10,6 +10,7 @@ export const useProductStore = create<ProductStoreI>((set)=>({
     addProduct:async (data)=>{
         const response = await ProductAPI.create(data);
         console.log(response);
+        return response;
     },
     getProducts:async ()=>{
         const response = await ProductAPI.get();
