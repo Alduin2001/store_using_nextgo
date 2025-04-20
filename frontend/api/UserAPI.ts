@@ -8,7 +8,7 @@ export default class UserAPI{
             const response = await apiClient.post("/user",data);
             return response;
         } catch (error) {
-            return error;
+            throw error;
         }
     }
     static async login(data:LoginUserDto):Promise<any>{

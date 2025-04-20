@@ -1,7 +1,8 @@
-import { BadRequestException, HttpStatus, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { BadRequestException, ConflictException, HttpStatus, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { PrismaService } from 'src/config/prisma.service';
+import { Prisma } from 'generated/prisma';
 
 @Injectable()
 export class CategoryService {
@@ -17,7 +18,12 @@ export class CategoryService {
       }
       return HttpStatus.CREATED;
     } catch (error) {
-      throw new InternalServerErrorException('Ошибка на сервере');
+      if(error instanceof Prisma.PrismaClientKnownRequestError){
+        if(error.code=='P2002'){
+          throw new ConflictException('Категория с таким названием уже существует');
+        }
+      }
+      throw new InternalServerErrorException(error.message);
     }
   }
 
@@ -48,6 +54,7 @@ export class CategoryService {
       if(!updated){
         throw new InternalServerErrorException('Не удалось обновить категорию');
       }
+      return {updated};
     } catch (error) {
       throw new InternalServerErrorException('Ошибка на сервере');
     }

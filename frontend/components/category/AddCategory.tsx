@@ -6,7 +6,6 @@ import { Button, Field, Input, Label } from "@headlessui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FC } from "react";
 import {useForm} from 'react-hook-form'
-import { toast } from "react-toastify";
 
 export const AddCategory:FC = ()=>{
     const {addCategory} = useCategoryStore();
@@ -16,13 +15,7 @@ export const AddCategory:FC = ()=>{
     })
 
     const submitForm = async (data:CreateCategoryDto)=>{
-        await addCategory(data)
-        .then(()=>{
-            toast('Категория добавлена',{closeButton:true});
-        })
-        .catch((err)=>{
-            toast('Не удалось добавить категорию')
-        });
+        await addCategory(data);
         reset();
     }
 
