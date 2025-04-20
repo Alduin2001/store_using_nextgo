@@ -10,6 +10,7 @@ import Link from "next/link";
 import macbook from '@/public/macbook.webp';
 import Image from "next/image";
 import { SearchProducts } from "@/components/forms/SearchProduct";
+import { ProductsComp } from "@/components/products/Products";
 
 export const metadata: Metadata = {
   title: "Товары",
@@ -17,11 +18,6 @@ export const metadata: Metadata = {
 };
 
 export default function Products() {
-  const products = [
-    { id: 1, name: "MacBook Air", description: "Легкий и мощный ноутбук", price: "120 000 ₽" },
-    { id: 2, name: "iPhone 14 Pro", description: "Смартфон с передовой камерой", price: "90 000 ₽" },
-    { id: 3, name: "Samsung Galaxy Watch", description: "Умные часы для фитнеса и стиля", price: "20 000 ₽" },
-  ];
 
   return (
     <Container>
@@ -32,23 +28,7 @@ export default function Products() {
           <SearchProducts/>
         </Card>
         <div className="flex-1 w-full">
-        <Row gap={2} min="300px">
-        {products.map((product) => (
-          <Card width="full" key={product.id} bordered className="shadow-md hover:shadow-lg">
-            <CardHeader>
-              <TypoGraphy Tag="h2" position="center" size="2xl" bold>{product.name}</TypoGraphy>
-            </CardHeader>
-            <CardBody>
-              <Image src={macbook} alt="mac"/>
-              <p className="mt-2">{product.description}</p>
-              <p className="text-lg font-bold mt-2">{product.price}</p>
-            </CardBody>
-            <CardFooter className="flex justify-center">
-              <Link href={`/products/${product.id}`} className="text-blue-600 hover:text-blue-800">Подробнее</Link>
-            </CardFooter>
-          </Card>
-        ))}
-        </Row>
+        <ProductsComp/>
         </div>
       </div>
     </Container>

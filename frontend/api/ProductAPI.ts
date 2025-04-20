@@ -18,4 +18,13 @@ export default class ProductAPI{
             return error;
         }
     }
+
+    static async remove(id:number):Promise<any>{
+        try {
+            const response = await apiClient.delete(`/product/${id}`);
+            return response;
+        } catch (error) {
+            return error;
+        }
+    }
 }

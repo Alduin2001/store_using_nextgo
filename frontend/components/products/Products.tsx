@@ -8,7 +8,7 @@ import { Row } from "../ui/grid/Row";
 
 export const ProductsComp:FC = ()=>{
     const {getProducts,products} = useProductStore();
-
+    
     useEffect(()=>{
         async function fetchProducts(){
             await getProducts();
