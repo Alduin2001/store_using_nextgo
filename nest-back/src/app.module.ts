@@ -10,6 +10,8 @@ import { JwtStrategy } from './config/jwt.strategy';
 import { RoleModule } from './role/role.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { OrderModule } from './order/order.module';
+import { BucketModule } from './bucket/bucket.module';
 
 @Module({
   imports: [
@@ -27,7 +29,7 @@ import { join } from 'path';
       }),
       inject:[ConfigService],
     }),
-    UserModule, CategoryModule, ProductModule, AuthModule, RoleModule],
+    UserModule, CategoryModule, ProductModule, AuthModule, RoleModule, OrderModule, BucketModule],
   controllers: [],
   providers: [JwtStrategy],
   exports:[JwtModule]

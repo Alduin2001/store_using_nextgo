@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, UseGuards, Req, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, UseGuards, Req, UseInterceptors, UploadedFiles, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -8,6 +8,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'src/guards/roles.guard';
 import { UserI } from 'src/interfaces/UserI';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { Request } from 'express';
 
 @Controller('product')
 export class ProductController {
@@ -32,6 +33,12 @@ export class ProductController {
   @Get('/forAdmin')
   findAllForAdmin() {
     return this.productService.findAllForAdmin();
+  }
+
+  @Get('/search')
+  search(@Query('name') name?:string,@Query('category') category?:string,@Query('minPrice') minPrice?:string,@Query('maxPrice') maxPrice?:string){
+    console.log(name);
+    return this.productService.search(name,category ? +category : undefined,minPrice ? +minPrice : undefined,maxPrice ? +maxPrice : undefined);
   }
 
   @Get(':id')

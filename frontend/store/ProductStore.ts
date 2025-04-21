@@ -9,6 +9,7 @@ export const useProductStore = create<ProductStoreI>((set,get)=>({
     selectedId:0,
     isOpenDelete:false,
     isOpenEdit:false,
+    minimum:0,
     openDeleteModal:(id)=>{
         set({selectedId:id,isOpenDelete:true});
     },
@@ -28,7 +29,21 @@ export const useProductStore = create<ProductStoreI>((set,get)=>({
     },
     getProducts:async ()=>{
         const response = await ProductAPI.get();
-        set({products:response.data.products})
+        set({
+            products:response.data.products,
+            minimum:response.data.minimum._min.price,
+        });
+    },
+    searchProducts: async (params)=>{
+        console.log(params);
+        try {
+            const response = await ProductAPI.search(params);
+            console.log(response);
+            set({products:response.data.products});
+        } catch (error) {
+            toast.error('Не удалось найти товары');
+            throw error;
+        }
     },
     getOneProduct:async (id)=>{
 

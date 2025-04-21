@@ -22,14 +22,16 @@ model Role {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   name     String
   surname  String
-  email    String @unique
+  email    String   @unique
   password String
   roleId   Int
   // Связи
-  role     Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  role     Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  orders   Order[]
+  buckets  Bucket[]
 }
 
 model Category {
@@ -40,15 +42,17 @@ model Category {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  price       Int
-  categoryId  Int
-  count       Int
+  id            Int            @id @default(autoincrement())
+  name          String
+  description   String
+  price         Int
+  categoryId    Int
+  count         Int
   // Связи
-  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  images      Images[]
+  category      Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  images        Images[]
+  orderProducts OrderProduct[]
+  buckets       Bucket[]
 }
 
 model Images {
@@ -57,4 +61,42 @@ model Images {
   productId Int
   // Связи
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Status {
+  id     Int     @id @default(autoincrement())
+  name   String
+  // Связи
+  orders Order[]
+}
+
+model Bucket {
+  id         Int     @id @default(autoincrement())
+  productId  Int
+  userBucket Int
+  count      Int
+  // Связи
+  product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user       User    @relation(fields: [userBucket], references: [id], onDelete: Cascade)
+}
+
+model OrderProduct {
+  id        Int     @id @default(autoincrement())
+  productId Int
+  orderId   Int
+  count     Int
+  // Связи
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model Order {
+  id            Int            @id @default(autoincrement())
+  createdAt     DateTime       @default(now())
+  ordererId     Int
+  statusId      Int
+  // Связи
+  status        Status         @relation(fields: [statusId], references: [id], onDelete: Cascade)
+  orderer       User           @relation(fields: [ordererId], references: [id], onDelete: Cascade)
+  orderProducts OrderProduct[]
 }

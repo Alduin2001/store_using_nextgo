@@ -14,7 +14,6 @@ export class AuthController {
   async create(@Body(new ValidationPipe()) createAuthDto: CreateAuthDto,@Res() res:Response) {
     const {token,role} = await this.authService.login(createAuthDto);
     res.cookie('jwt',token,{httpOnly:true,sameSite:'lax',maxAge:1000*60*60*12});
-    console.log(token);
     return res.status(200).json({role});
   }
 

@@ -8,3 +8,10 @@ export interface CreateProductDto{
     price:number
     count:number
 }
+
+export interface SearchProductDto{
+    category?:string
+    name?:string
+    minPrice?:number
+    maxPrice?:number
+}

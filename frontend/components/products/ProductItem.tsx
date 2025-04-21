@@ -17,7 +17,7 @@ export const ProductItem:FC<ProductModel> = ({id,name,description,images,price,c
     const {isOpenDelete,openDeleteModal} = useProductStore();
     
     return(
-        <Card>
+        <Card shadow="2xl" bordered className="pl-1 pr-1 rounded-xl">
             <CardHeader>{name}</CardHeader>
             <CardBody>
                 <SwiperComp images={images}/>

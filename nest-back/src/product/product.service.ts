@@ -4,6 +4,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { PrismaService } from 'src/config/prisma.service';
 import { rm } from 'fs/promises';
 import * as path from 'path';
+import { Prisma } from 'generated/prisma';
 
 @Injectable()
 export class ProductService {
@@ -49,10 +50,15 @@ export class ProductService {
           images:true
         }
       });
+      const minimum = await this.prisma.product.aggregate({
+        _min:{
+          price:true
+        }
+      });
       if(!products){
         throw new InternalServerErrorException('Не удалось найти данные');
       }
-      return {products};
+      return {products,minimum};
     } catch (error) {
       throw new InternalServerErrorException(error);
     }
@@ -92,6 +98,32 @@ export class ProductService {
     }
   }
 
+  async search(name?:string,category?:number,minPrice?:number,maxPrice?:number){
+    try {
+      console.log(name);
+      console.log(category);
+      let where:Prisma.ProductWhereInput = {};
+      if (name) where.name = {contains:name};
+      if (category!==undefined) where.categoryId = category;
+      if (minPrice) where.price = {gte:minPrice};
+      if (maxPrice) where.price = {lte:maxPrice};
+      where.count = {gt:0};
+      console.log(where);
+      const products = await this.prisma.product.findMany({
+        include:{
+          category:true,
+          images:true
+        },
+        where
+      });
+      if(products.length==0){
+        throw new BadRequestException('Не удалось найти товары');
+      }
+      return {products};
+    } catch (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+  }
   async update(id: number, updateProductDto: UpdateProductDto) {
     try {
       const product = await this.prisma.product.update({where:{id},data:{...updateProductDto}});

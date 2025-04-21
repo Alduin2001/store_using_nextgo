@@ -1,4 +1,5 @@
 import { apiClient } from "@/configs/apiClient";
+import { SearchProductDto } from "@/interfaces/dto/product.dto";
 
 export default class ProductAPI{
 
@@ -18,7 +19,14 @@ export default class ProductAPI{
             return error;
         }
     }
-
+    static async search(queryParams:SearchProductDto):Promise<any>{
+        try {
+            const response = await apiClient.get('/product/search',{params:queryParams});
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    }
     static async remove(id:number):Promise<any>{
         try {
             const response = await apiClient.delete(`/product/${id}`);
