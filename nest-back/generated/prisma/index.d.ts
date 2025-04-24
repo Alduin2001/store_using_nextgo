@@ -44,11 +44,6 @@ export type Images = $Result.DefaultSelection<Prisma.$ImagesPayload>
  */
 export type Status = $Result.DefaultSelection<Prisma.$StatusPayload>
 /**
- * Model Bucket
- * 
- */
-export type Bucket = $Result.DefaultSelection<Prisma.$BucketPayload>
-/**
  * Model OrderProduct
  * 
  */
@@ -243,16 +238,6 @@ export class PrismaClient<
     * ```
     */
   get status(): Prisma.StatusDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.bucket`: Exposes CRUD operations for the **Bucket** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Buckets
-    * const buckets = await prisma.bucket.findMany()
-    * ```
-    */
-  get bucket(): Prisma.BucketDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.orderProduct`: Exposes CRUD operations for the **OrderProduct** model.
@@ -719,7 +704,6 @@ export namespace Prisma {
     Product: 'Product',
     Images: 'Images',
     Status: 'Status',
-    Bucket: 'Bucket',
     OrderProduct: 'OrderProduct',
     Order: 'Order'
   };
@@ -740,7 +724,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "role" | "user" | "category" | "product" | "images" | "status" | "bucket" | "orderProduct" | "order"
+      modelProps: "role" | "user" | "category" | "product" | "images" | "status" | "orderProduct" | "order"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1188,80 +1172,6 @@ export namespace Prisma {
           }
         }
       }
-      Bucket: {
-        payload: Prisma.$BucketPayload<ExtArgs>
-        fields: Prisma.BucketFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.BucketFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BucketPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.BucketFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BucketPayload>
-          }
-          findFirst: {
-            args: Prisma.BucketFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BucketPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.BucketFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BucketPayload>
-          }
-          findMany: {
-            args: Prisma.BucketFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BucketPayload>[]
-          }
-          create: {
-            args: Prisma.BucketCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BucketPayload>
-          }
-          createMany: {
-            args: Prisma.BucketCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.BucketCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BucketPayload>[]
-          }
-          delete: {
-            args: Prisma.BucketDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BucketPayload>
-          }
-          update: {
-            args: Prisma.BucketUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BucketPayload>
-          }
-          deleteMany: {
-            args: Prisma.BucketDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.BucketUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.BucketUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BucketPayload>[]
-          }
-          upsert: {
-            args: Prisma.BucketUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BucketPayload>
-          }
-          aggregate: {
-            args: Prisma.BucketAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateBucket>
-          }
-          groupBy: {
-            args: Prisma.BucketGroupByArgs<ExtArgs>
-            result: $Utils.Optional<BucketGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.BucketCountArgs<ExtArgs>
-            result: $Utils.Optional<BucketCountAggregateOutputType> | number
-          }
-        }
-      }
       OrderProduct: {
         payload: Prisma.$OrderProductPayload<ExtArgs>
         fields: Prisma.OrderProductFieldRefs
@@ -1500,7 +1410,6 @@ export namespace Prisma {
     product?: ProductOmit
     images?: ImagesOmit
     status?: StatusOmit
-    bucket?: BucketOmit
     orderProduct?: OrderProductOmit
     order?: OrderOmit
   }
@@ -1629,12 +1538,10 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     orders: number
-    buckets: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orders?: boolean | UserCountOutputTypeCountOrdersArgs
-    buckets?: boolean | UserCountOutputTypeCountBucketsArgs
   }
 
   // Custom InputTypes
@@ -1653,13 +1560,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountBucketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BucketWhereInput
   }
 
 
@@ -1701,13 +1601,11 @@ export namespace Prisma {
   export type ProductCountOutputType = {
     images: number
     orderProducts: number
-    buckets: number
   }
 
   export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     images?: boolean | ProductCountOutputTypeCountImagesArgs
     orderProducts?: boolean | ProductCountOutputTypeCountOrderProductsArgs
-    buckets?: boolean | ProductCountOutputTypeCountBucketsArgs
   }
 
   // Custom InputTypes
@@ -1733,13 +1631,6 @@ export namespace Prisma {
    */
   export type ProductCountOutputTypeCountOrderProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderProductWhereInput
-  }
-
-  /**
-   * ProductCountOutputType without action
-   */
-  export type ProductCountOutputTypeCountBucketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BucketWhereInput
   }
 
 
@@ -3086,7 +2977,6 @@ export namespace Prisma {
     roleId?: boolean
     role?: boolean | RoleDefaultArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
-    buckets?: boolean | User$bucketsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3123,7 +3013,6 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
-    buckets?: boolean | User$bucketsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3138,7 +3027,6 @@ export namespace Prisma {
     objects: {
       role: Prisma.$RolePayload<ExtArgs>
       orders: Prisma.$OrderPayload<ExtArgs>[]
-      buckets: Prisma.$BucketPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3543,7 +3431,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     orders<T extends User$ordersArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    buckets<T extends User$bucketsArgs<ExtArgs> = {}>(args?: Subset<T, User$bucketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3996,30 +3883,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OrderScalarFieldEnum | OrderScalarFieldEnum[]
-  }
-
-  /**
-   * User.buckets
-   */
-  export type User$bucketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketInclude<ExtArgs> | null
-    where?: BucketWhereInput
-    orderBy?: BucketOrderByWithRelationInput | BucketOrderByWithRelationInput[]
-    cursor?: BucketWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BucketScalarFieldEnum | BucketScalarFieldEnum[]
   }
 
   /**
@@ -5327,7 +5190,6 @@ export namespace Prisma {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     images?: boolean | Product$imagesArgs<ExtArgs>
     orderProducts?: boolean | Product$orderProductsArgs<ExtArgs>
-    buckets?: boolean | Product$bucketsArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
@@ -5365,7 +5227,6 @@ export namespace Prisma {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     images?: boolean | Product$imagesArgs<ExtArgs>
     orderProducts?: boolean | Product$orderProductsArgs<ExtArgs>
-    buckets?: boolean | Product$bucketsArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5381,7 +5242,6 @@ export namespace Prisma {
       category: Prisma.$CategoryPayload<ExtArgs>
       images: Prisma.$ImagesPayload<ExtArgs>[]
       orderProducts: Prisma.$OrderProductPayload<ExtArgs>[]
-      buckets: Prisma.$BucketPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5787,7 +5647,6 @@ export namespace Prisma {
     category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     images<T extends Product$imagesArgs<ExtArgs> = {}>(args?: Subset<T, Product$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ImagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orderProducts<T extends Product$orderProductsArgs<ExtArgs> = {}>(args?: Subset<T, Product$orderProductsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    buckets<T extends Product$bucketsArgs<ExtArgs> = {}>(args?: Subset<T, Product$bucketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6264,30 +6123,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OrderProductScalarFieldEnum | OrderProductScalarFieldEnum[]
-  }
-
-  /**
-   * Product.buckets
-   */
-  export type Product$bucketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketInclude<ExtArgs> | null
-    where?: BucketWhereInput
-    orderBy?: BucketOrderByWithRelationInput | BucketOrderByWithRelationInput[]
-    cursor?: BucketWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BucketScalarFieldEnum | BucketScalarFieldEnum[]
   }
 
   /**
@@ -8441,1105 +8276,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: StatusInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Bucket
-   */
-
-  export type AggregateBucket = {
-    _count: BucketCountAggregateOutputType | null
-    _avg: BucketAvgAggregateOutputType | null
-    _sum: BucketSumAggregateOutputType | null
-    _min: BucketMinAggregateOutputType | null
-    _max: BucketMaxAggregateOutputType | null
-  }
-
-  export type BucketAvgAggregateOutputType = {
-    id: number | null
-    productId: number | null
-    userBucket: number | null
-    count: number | null
-  }
-
-  export type BucketSumAggregateOutputType = {
-    id: number | null
-    productId: number | null
-    userBucket: number | null
-    count: number | null
-  }
-
-  export type BucketMinAggregateOutputType = {
-    id: number | null
-    productId: number | null
-    userBucket: number | null
-    count: number | null
-  }
-
-  export type BucketMaxAggregateOutputType = {
-    id: number | null
-    productId: number | null
-    userBucket: number | null
-    count: number | null
-  }
-
-  export type BucketCountAggregateOutputType = {
-    id: number
-    productId: number
-    userBucket: number
-    count: number
-    _all: number
-  }
-
-
-  export type BucketAvgAggregateInputType = {
-    id?: true
-    productId?: true
-    userBucket?: true
-    count?: true
-  }
-
-  export type BucketSumAggregateInputType = {
-    id?: true
-    productId?: true
-    userBucket?: true
-    count?: true
-  }
-
-  export type BucketMinAggregateInputType = {
-    id?: true
-    productId?: true
-    userBucket?: true
-    count?: true
-  }
-
-  export type BucketMaxAggregateInputType = {
-    id?: true
-    productId?: true
-    userBucket?: true
-    count?: true
-  }
-
-  export type BucketCountAggregateInputType = {
-    id?: true
-    productId?: true
-    userBucket?: true
-    count?: true
-    _all?: true
-  }
-
-  export type BucketAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Bucket to aggregate.
-     */
-    where?: BucketWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Buckets to fetch.
-     */
-    orderBy?: BucketOrderByWithRelationInput | BucketOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: BucketWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Buckets from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Buckets.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Buckets
-    **/
-    _count?: true | BucketCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: BucketAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: BucketSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: BucketMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: BucketMaxAggregateInputType
-  }
-
-  export type GetBucketAggregateType<T extends BucketAggregateArgs> = {
-        [P in keyof T & keyof AggregateBucket]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateBucket[P]>
-      : GetScalarType<T[P], AggregateBucket[P]>
-  }
-
-
-
-
-  export type BucketGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BucketWhereInput
-    orderBy?: BucketOrderByWithAggregationInput | BucketOrderByWithAggregationInput[]
-    by: BucketScalarFieldEnum[] | BucketScalarFieldEnum
-    having?: BucketScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: BucketCountAggregateInputType | true
-    _avg?: BucketAvgAggregateInputType
-    _sum?: BucketSumAggregateInputType
-    _min?: BucketMinAggregateInputType
-    _max?: BucketMaxAggregateInputType
-  }
-
-  export type BucketGroupByOutputType = {
-    id: number
-    productId: number
-    userBucket: number
-    count: number
-    _count: BucketCountAggregateOutputType | null
-    _avg: BucketAvgAggregateOutputType | null
-    _sum: BucketSumAggregateOutputType | null
-    _min: BucketMinAggregateOutputType | null
-    _max: BucketMaxAggregateOutputType | null
-  }
-
-  type GetBucketGroupByPayload<T extends BucketGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<BucketGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof BucketGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], BucketGroupByOutputType[P]>
-            : GetScalarType<T[P], BucketGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type BucketSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    productId?: boolean
-    userBucket?: boolean
-    count?: boolean
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["bucket"]>
-
-  export type BucketSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    productId?: boolean
-    userBucket?: boolean
-    count?: boolean
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["bucket"]>
-
-  export type BucketSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    productId?: boolean
-    userBucket?: boolean
-    count?: boolean
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["bucket"]>
-
-  export type BucketSelectScalar = {
-    id?: boolean
-    productId?: boolean
-    userBucket?: boolean
-    count?: boolean
-  }
-
-  export type BucketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "userBucket" | "count", ExtArgs["result"]["bucket"]>
-  export type BucketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type BucketIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type BucketIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $BucketPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Bucket"
-    objects: {
-      product: Prisma.$ProductPayload<ExtArgs>
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      productId: number
-      userBucket: number
-      count: number
-    }, ExtArgs["result"]["bucket"]>
-    composites: {}
-  }
-
-  type BucketGetPayload<S extends boolean | null | undefined | BucketDefaultArgs> = $Result.GetResult<Prisma.$BucketPayload, S>
-
-  type BucketCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<BucketFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: BucketCountAggregateInputType | true
-    }
-
-  export interface BucketDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Bucket'], meta: { name: 'Bucket' } }
-    /**
-     * Find zero or one Bucket that matches the filter.
-     * @param {BucketFindUniqueArgs} args - Arguments to find a Bucket
-     * @example
-     * // Get one Bucket
-     * const bucket = await prisma.bucket.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends BucketFindUniqueArgs>(args: SelectSubset<T, BucketFindUniqueArgs<ExtArgs>>): Prisma__BucketClient<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Bucket that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {BucketFindUniqueOrThrowArgs} args - Arguments to find a Bucket
-     * @example
-     * // Get one Bucket
-     * const bucket = await prisma.bucket.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends BucketFindUniqueOrThrowArgs>(args: SelectSubset<T, BucketFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BucketClient<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Bucket that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BucketFindFirstArgs} args - Arguments to find a Bucket
-     * @example
-     * // Get one Bucket
-     * const bucket = await prisma.bucket.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends BucketFindFirstArgs>(args?: SelectSubset<T, BucketFindFirstArgs<ExtArgs>>): Prisma__BucketClient<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Bucket that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BucketFindFirstOrThrowArgs} args - Arguments to find a Bucket
-     * @example
-     * // Get one Bucket
-     * const bucket = await prisma.bucket.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends BucketFindFirstOrThrowArgs>(args?: SelectSubset<T, BucketFindFirstOrThrowArgs<ExtArgs>>): Prisma__BucketClient<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Buckets that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BucketFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Buckets
-     * const buckets = await prisma.bucket.findMany()
-     * 
-     * // Get first 10 Buckets
-     * const buckets = await prisma.bucket.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const bucketWithIdOnly = await prisma.bucket.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends BucketFindManyArgs>(args?: SelectSubset<T, BucketFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Bucket.
-     * @param {BucketCreateArgs} args - Arguments to create a Bucket.
-     * @example
-     * // Create one Bucket
-     * const Bucket = await prisma.bucket.create({
-     *   data: {
-     *     // ... data to create a Bucket
-     *   }
-     * })
-     * 
-     */
-    create<T extends BucketCreateArgs>(args: SelectSubset<T, BucketCreateArgs<ExtArgs>>): Prisma__BucketClient<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Buckets.
-     * @param {BucketCreateManyArgs} args - Arguments to create many Buckets.
-     * @example
-     * // Create many Buckets
-     * const bucket = await prisma.bucket.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends BucketCreateManyArgs>(args?: SelectSubset<T, BucketCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Buckets and returns the data saved in the database.
-     * @param {BucketCreateManyAndReturnArgs} args - Arguments to create many Buckets.
-     * @example
-     * // Create many Buckets
-     * const bucket = await prisma.bucket.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Buckets and only return the `id`
-     * const bucketWithIdOnly = await prisma.bucket.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends BucketCreateManyAndReturnArgs>(args?: SelectSubset<T, BucketCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Bucket.
-     * @param {BucketDeleteArgs} args - Arguments to delete one Bucket.
-     * @example
-     * // Delete one Bucket
-     * const Bucket = await prisma.bucket.delete({
-     *   where: {
-     *     // ... filter to delete one Bucket
-     *   }
-     * })
-     * 
-     */
-    delete<T extends BucketDeleteArgs>(args: SelectSubset<T, BucketDeleteArgs<ExtArgs>>): Prisma__BucketClient<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Bucket.
-     * @param {BucketUpdateArgs} args - Arguments to update one Bucket.
-     * @example
-     * // Update one Bucket
-     * const bucket = await prisma.bucket.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends BucketUpdateArgs>(args: SelectSubset<T, BucketUpdateArgs<ExtArgs>>): Prisma__BucketClient<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Buckets.
-     * @param {BucketDeleteManyArgs} args - Arguments to filter Buckets to delete.
-     * @example
-     * // Delete a few Buckets
-     * const { count } = await prisma.bucket.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends BucketDeleteManyArgs>(args?: SelectSubset<T, BucketDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Buckets.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BucketUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Buckets
-     * const bucket = await prisma.bucket.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends BucketUpdateManyArgs>(args: SelectSubset<T, BucketUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Buckets and returns the data updated in the database.
-     * @param {BucketUpdateManyAndReturnArgs} args - Arguments to update many Buckets.
-     * @example
-     * // Update many Buckets
-     * const bucket = await prisma.bucket.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Buckets and only return the `id`
-     * const bucketWithIdOnly = await prisma.bucket.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends BucketUpdateManyAndReturnArgs>(args: SelectSubset<T, BucketUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Bucket.
-     * @param {BucketUpsertArgs} args - Arguments to update or create a Bucket.
-     * @example
-     * // Update or create a Bucket
-     * const bucket = await prisma.bucket.upsert({
-     *   create: {
-     *     // ... data to create a Bucket
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Bucket we want to update
-     *   }
-     * })
-     */
-    upsert<T extends BucketUpsertArgs>(args: SelectSubset<T, BucketUpsertArgs<ExtArgs>>): Prisma__BucketClient<$Result.GetResult<Prisma.$BucketPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Buckets.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BucketCountArgs} args - Arguments to filter Buckets to count.
-     * @example
-     * // Count the number of Buckets
-     * const count = await prisma.bucket.count({
-     *   where: {
-     *     // ... the filter for the Buckets we want to count
-     *   }
-     * })
-    **/
-    count<T extends BucketCountArgs>(
-      args?: Subset<T, BucketCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], BucketCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Bucket.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BucketAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends BucketAggregateArgs>(args: Subset<T, BucketAggregateArgs>): Prisma.PrismaPromise<GetBucketAggregateType<T>>
-
-    /**
-     * Group by Bucket.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BucketGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends BucketGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: BucketGroupByArgs['orderBy'] }
-        : { orderBy?: BucketGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, BucketGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBucketGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Bucket model
-   */
-  readonly fields: BucketFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Bucket.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__BucketClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Bucket model
-   */
-  interface BucketFieldRefs {
-    readonly id: FieldRef<"Bucket", 'Int'>
-    readonly productId: FieldRef<"Bucket", 'Int'>
-    readonly userBucket: FieldRef<"Bucket", 'Int'>
-    readonly count: FieldRef<"Bucket", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Bucket findUnique
-   */
-  export type BucketFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketInclude<ExtArgs> | null
-    /**
-     * Filter, which Bucket to fetch.
-     */
-    where: BucketWhereUniqueInput
-  }
-
-  /**
-   * Bucket findUniqueOrThrow
-   */
-  export type BucketFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketInclude<ExtArgs> | null
-    /**
-     * Filter, which Bucket to fetch.
-     */
-    where: BucketWhereUniqueInput
-  }
-
-  /**
-   * Bucket findFirst
-   */
-  export type BucketFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketInclude<ExtArgs> | null
-    /**
-     * Filter, which Bucket to fetch.
-     */
-    where?: BucketWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Buckets to fetch.
-     */
-    orderBy?: BucketOrderByWithRelationInput | BucketOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Buckets.
-     */
-    cursor?: BucketWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Buckets from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Buckets.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Buckets.
-     */
-    distinct?: BucketScalarFieldEnum | BucketScalarFieldEnum[]
-  }
-
-  /**
-   * Bucket findFirstOrThrow
-   */
-  export type BucketFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketInclude<ExtArgs> | null
-    /**
-     * Filter, which Bucket to fetch.
-     */
-    where?: BucketWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Buckets to fetch.
-     */
-    orderBy?: BucketOrderByWithRelationInput | BucketOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Buckets.
-     */
-    cursor?: BucketWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Buckets from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Buckets.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Buckets.
-     */
-    distinct?: BucketScalarFieldEnum | BucketScalarFieldEnum[]
-  }
-
-  /**
-   * Bucket findMany
-   */
-  export type BucketFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketInclude<ExtArgs> | null
-    /**
-     * Filter, which Buckets to fetch.
-     */
-    where?: BucketWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Buckets to fetch.
-     */
-    orderBy?: BucketOrderByWithRelationInput | BucketOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Buckets.
-     */
-    cursor?: BucketWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Buckets from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Buckets.
-     */
-    skip?: number
-    distinct?: BucketScalarFieldEnum | BucketScalarFieldEnum[]
-  }
-
-  /**
-   * Bucket create
-   */
-  export type BucketCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Bucket.
-     */
-    data: XOR<BucketCreateInput, BucketUncheckedCreateInput>
-  }
-
-  /**
-   * Bucket createMany
-   */
-  export type BucketCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Buckets.
-     */
-    data: BucketCreateManyInput | BucketCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Bucket createManyAndReturn
-   */
-  export type BucketCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * The data used to create many Buckets.
-     */
-    data: BucketCreateManyInput | BucketCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Bucket update
-   */
-  export type BucketUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Bucket.
-     */
-    data: XOR<BucketUpdateInput, BucketUncheckedUpdateInput>
-    /**
-     * Choose, which Bucket to update.
-     */
-    where: BucketWhereUniqueInput
-  }
-
-  /**
-   * Bucket updateMany
-   */
-  export type BucketUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Buckets.
-     */
-    data: XOR<BucketUpdateManyMutationInput, BucketUncheckedUpdateManyInput>
-    /**
-     * Filter which Buckets to update
-     */
-    where?: BucketWhereInput
-    /**
-     * Limit how many Buckets to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Bucket updateManyAndReturn
-   */
-  export type BucketUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * The data used to update Buckets.
-     */
-    data: XOR<BucketUpdateManyMutationInput, BucketUncheckedUpdateManyInput>
-    /**
-     * Filter which Buckets to update
-     */
-    where?: BucketWhereInput
-    /**
-     * Limit how many Buckets to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Bucket upsert
-   */
-  export type BucketUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Bucket to update in case it exists.
-     */
-    where: BucketWhereUniqueInput
-    /**
-     * In case the Bucket found by the `where` argument doesn't exist, create a new Bucket with this data.
-     */
-    create: XOR<BucketCreateInput, BucketUncheckedCreateInput>
-    /**
-     * In case the Bucket was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<BucketUpdateInput, BucketUncheckedUpdateInput>
-  }
-
-  /**
-   * Bucket delete
-   */
-  export type BucketDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketInclude<ExtArgs> | null
-    /**
-     * Filter which Bucket to delete.
-     */
-    where: BucketWhereUniqueInput
-  }
-
-  /**
-   * Bucket deleteMany
-   */
-  export type BucketDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Buckets to delete
-     */
-    where?: BucketWhereInput
-    /**
-     * Limit how many Buckets to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Bucket without action
-   */
-  export type BucketDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Bucket
-     */
-    select?: BucketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Bucket
-     */
-    omit?: BucketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BucketInclude<ExtArgs> | null
   }
 
 
@@ -11838,16 +10574,6 @@ export namespace Prisma {
   export type StatusScalarFieldEnum = (typeof StatusScalarFieldEnum)[keyof typeof StatusScalarFieldEnum]
 
 
-  export const BucketScalarFieldEnum: {
-    id: 'id',
-    productId: 'productId',
-    userBucket: 'userBucket',
-    count: 'count'
-  };
-
-  export type BucketScalarFieldEnum = (typeof BucketScalarFieldEnum)[keyof typeof BucketScalarFieldEnum]
-
-
   export const OrderProductScalarFieldEnum: {
     id: 'id',
     productId: 'productId',
@@ -12002,7 +10728,6 @@ export namespace Prisma {
     roleId?: IntFilter<"User"> | number
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
     orders?: OrderListRelationFilter
-    buckets?: BucketListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -12014,7 +10739,6 @@ export namespace Prisma {
     roleId?: SortOrder
     role?: RoleOrderByWithRelationInput
     orders?: OrderOrderByRelationAggregateInput
-    buckets?: BucketOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -12029,7 +10753,6 @@ export namespace Prisma {
     roleId?: IntFilter<"User"> | number
     role?: XOR<RoleScalarRelationFilter, RoleWhereInput>
     orders?: OrderListRelationFilter
-    buckets?: BucketListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -12113,7 +10836,6 @@ export namespace Prisma {
     category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
     images?: ImagesListRelationFilter
     orderProducts?: OrderProductListRelationFilter
-    buckets?: BucketListRelationFilter
   }
 
   export type ProductOrderByWithRelationInput = {
@@ -12126,7 +10848,6 @@ export namespace Prisma {
     category?: CategoryOrderByWithRelationInput
     images?: ImagesOrderByRelationAggregateInput
     orderProducts?: OrderProductOrderByRelationAggregateInput
-    buckets?: BucketOrderByRelationAggregateInput
   }
 
   export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -12142,7 +10863,6 @@ export namespace Prisma {
     category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
     images?: ImagesListRelationFilter
     orderProducts?: OrderProductListRelationFilter
-    buckets?: BucketListRelationFilter
   }, "id">
 
   export type ProductOrderByWithAggregationInput = {
@@ -12258,61 +10978,6 @@ export namespace Prisma {
     NOT?: StatusScalarWhereWithAggregatesInput | StatusScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Status"> | number
     name?: StringWithAggregatesFilter<"Status"> | string
-  }
-
-  export type BucketWhereInput = {
-    AND?: BucketWhereInput | BucketWhereInput[]
-    OR?: BucketWhereInput[]
-    NOT?: BucketWhereInput | BucketWhereInput[]
-    id?: IntFilter<"Bucket"> | number
-    productId?: IntFilter<"Bucket"> | number
-    userBucket?: IntFilter<"Bucket"> | number
-    count?: IntFilter<"Bucket"> | number
-    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type BucketOrderByWithRelationInput = {
-    id?: SortOrder
-    productId?: SortOrder
-    userBucket?: SortOrder
-    count?: SortOrder
-    product?: ProductOrderByWithRelationInput
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type BucketWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: BucketWhereInput | BucketWhereInput[]
-    OR?: BucketWhereInput[]
-    NOT?: BucketWhereInput | BucketWhereInput[]
-    productId?: IntFilter<"Bucket"> | number
-    userBucket?: IntFilter<"Bucket"> | number
-    count?: IntFilter<"Bucket"> | number
-    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
-
-  export type BucketOrderByWithAggregationInput = {
-    id?: SortOrder
-    productId?: SortOrder
-    userBucket?: SortOrder
-    count?: SortOrder
-    _count?: BucketCountOrderByAggregateInput
-    _avg?: BucketAvgOrderByAggregateInput
-    _max?: BucketMaxOrderByAggregateInput
-    _min?: BucketMinOrderByAggregateInput
-    _sum?: BucketSumOrderByAggregateInput
-  }
-
-  export type BucketScalarWhereWithAggregatesInput = {
-    AND?: BucketScalarWhereWithAggregatesInput | BucketScalarWhereWithAggregatesInput[]
-    OR?: BucketScalarWhereWithAggregatesInput[]
-    NOT?: BucketScalarWhereWithAggregatesInput | BucketScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Bucket"> | number
-    productId?: IntWithAggregatesFilter<"Bucket"> | number
-    userBucket?: IntWithAggregatesFilter<"Bucket"> | number
-    count?: IntWithAggregatesFilter<"Bucket"> | number
   }
 
   export type OrderProductWhereInput = {
@@ -12471,7 +11136,6 @@ export namespace Prisma {
     password: string
     role: RoleCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutOrdererInput
-    buckets?: BucketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -12482,7 +11146,6 @@ export namespace Prisma {
     password: string
     roleId: number
     orders?: OrderUncheckedCreateNestedManyWithoutOrdererInput
-    buckets?: BucketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -12492,7 +11155,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: RoleUpdateOneRequiredWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutOrdererNestedInput
-    buckets?: BucketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -12503,7 +11165,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     roleId?: IntFieldUpdateOperationsInput | number
     orders?: OrderUncheckedUpdateManyWithoutOrdererNestedInput
-    buckets?: BucketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -12575,7 +11236,6 @@ export namespace Prisma {
     category: CategoryCreateNestedOneWithoutProductsInput
     images?: ImagesCreateNestedManyWithoutProductInput
     orderProducts?: OrderProductCreateNestedManyWithoutProductInput
-    buckets?: BucketCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateInput = {
@@ -12587,7 +11247,6 @@ export namespace Prisma {
     count: number
     images?: ImagesUncheckedCreateNestedManyWithoutProductInput
     orderProducts?: OrderProductUncheckedCreateNestedManyWithoutProductInput
-    buckets?: BucketUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductUpdateInput = {
@@ -12598,7 +11257,6 @@ export namespace Prisma {
     category?: CategoryUpdateOneRequiredWithoutProductsNestedInput
     images?: ImagesUpdateManyWithoutProductNestedInput
     orderProducts?: OrderProductUpdateManyWithoutProductNestedInput
-    buckets?: BucketUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateInput = {
@@ -12610,7 +11268,6 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     images?: ImagesUncheckedUpdateManyWithoutProductNestedInput
     orderProducts?: OrderProductUncheckedUpdateManyWithoutProductNestedInput
-    buckets?: BucketUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductCreateManyInput = {
@@ -12710,50 +11367,6 @@ export namespace Prisma {
   export type StatusUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type BucketCreateInput = {
-    count: number
-    product: ProductCreateNestedOneWithoutBucketsInput
-    user: UserCreateNestedOneWithoutBucketsInput
-  }
-
-  export type BucketUncheckedCreateInput = {
-    id?: number
-    productId: number
-    userBucket: number
-    count: number
-  }
-
-  export type BucketUpdateInput = {
-    count?: IntFieldUpdateOperationsInput | number
-    product?: ProductUpdateOneRequiredWithoutBucketsNestedInput
-    user?: UserUpdateOneRequiredWithoutBucketsNestedInput
-  }
-
-  export type BucketUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    productId?: IntFieldUpdateOperationsInput | number
-    userBucket?: IntFieldUpdateOperationsInput | number
-    count?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type BucketCreateManyInput = {
-    id?: number
-    productId: number
-    userBucket: number
-    count: number
-  }
-
-  export type BucketUpdateManyMutationInput = {
-    count?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type BucketUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    productId?: IntFieldUpdateOperationsInput | number
-    userBucket?: IntFieldUpdateOperationsInput | number
-    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type OrderProductCreateInput = {
@@ -12952,17 +11565,7 @@ export namespace Prisma {
     none?: OrderWhereInput
   }
 
-  export type BucketListRelationFilter = {
-    every?: BucketWhereInput
-    some?: BucketWhereInput
-    none?: BucketWhereInput
-  }
-
   export type OrderOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type BucketOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13158,46 +11761,6 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
-  export type BucketCountOrderByAggregateInput = {
-    id?: SortOrder
-    productId?: SortOrder
-    userBucket?: SortOrder
-    count?: SortOrder
-  }
-
-  export type BucketAvgOrderByAggregateInput = {
-    id?: SortOrder
-    productId?: SortOrder
-    userBucket?: SortOrder
-    count?: SortOrder
-  }
-
-  export type BucketMaxOrderByAggregateInput = {
-    id?: SortOrder
-    productId?: SortOrder
-    userBucket?: SortOrder
-    count?: SortOrder
-  }
-
-  export type BucketMinOrderByAggregateInput = {
-    id?: SortOrder
-    productId?: SortOrder
-    userBucket?: SortOrder
-    count?: SortOrder
-  }
-
-  export type BucketSumOrderByAggregateInput = {
-    id?: SortOrder
-    productId?: SortOrder
-    userBucket?: SortOrder
-    count?: SortOrder
-  }
-
   export type OrderScalarRelationFilter = {
     is?: OrderWhereInput
     isNot?: OrderWhereInput
@@ -13252,6 +11815,11 @@ export namespace Prisma {
   export type StatusScalarRelationFilter = {
     is?: StatusWhereInput
     isNot?: StatusWhereInput
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
   export type OrderCountOrderByAggregateInput = {
@@ -13368,25 +11936,11 @@ export namespace Prisma {
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
   }
 
-  export type BucketCreateNestedManyWithoutUserInput = {
-    create?: XOR<BucketCreateWithoutUserInput, BucketUncheckedCreateWithoutUserInput> | BucketCreateWithoutUserInput[] | BucketUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BucketCreateOrConnectWithoutUserInput | BucketCreateOrConnectWithoutUserInput[]
-    createMany?: BucketCreateManyUserInputEnvelope
-    connect?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-  }
-
   export type OrderUncheckedCreateNestedManyWithoutOrdererInput = {
     create?: XOR<OrderCreateWithoutOrdererInput, OrderUncheckedCreateWithoutOrdererInput> | OrderCreateWithoutOrdererInput[] | OrderUncheckedCreateWithoutOrdererInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutOrdererInput | OrderCreateOrConnectWithoutOrdererInput[]
     createMany?: OrderCreateManyOrdererInputEnvelope
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
-  }
-
-  export type BucketUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<BucketCreateWithoutUserInput, BucketUncheckedCreateWithoutUserInput> | BucketCreateWithoutUserInput[] | BucketUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BucketCreateOrConnectWithoutUserInput | BucketCreateOrConnectWithoutUserInput[]
-    createMany?: BucketCreateManyUserInputEnvelope
-    connect?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
   }
 
   export type RoleUpdateOneRequiredWithoutUserNestedInput = {
@@ -13411,20 +11965,6 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
-  export type BucketUpdateManyWithoutUserNestedInput = {
-    create?: XOR<BucketCreateWithoutUserInput, BucketUncheckedCreateWithoutUserInput> | BucketCreateWithoutUserInput[] | BucketUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BucketCreateOrConnectWithoutUserInput | BucketCreateOrConnectWithoutUserInput[]
-    upsert?: BucketUpsertWithWhereUniqueWithoutUserInput | BucketUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: BucketCreateManyUserInputEnvelope
-    set?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    disconnect?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    delete?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    connect?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    update?: BucketUpdateWithWhereUniqueWithoutUserInput | BucketUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: BucketUpdateManyWithWhereWithoutUserInput | BucketUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: BucketScalarWhereInput | BucketScalarWhereInput[]
-  }
-
   export type OrderUncheckedUpdateManyWithoutOrdererNestedInput = {
     create?: XOR<OrderCreateWithoutOrdererInput, OrderUncheckedCreateWithoutOrdererInput> | OrderCreateWithoutOrdererInput[] | OrderUncheckedCreateWithoutOrdererInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutOrdererInput | OrderCreateOrConnectWithoutOrdererInput[]
@@ -13437,20 +11977,6 @@ export namespace Prisma {
     update?: OrderUpdateWithWhereUniqueWithoutOrdererInput | OrderUpdateWithWhereUniqueWithoutOrdererInput[]
     updateMany?: OrderUpdateManyWithWhereWithoutOrdererInput | OrderUpdateManyWithWhereWithoutOrdererInput[]
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
-  }
-
-  export type BucketUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<BucketCreateWithoutUserInput, BucketUncheckedCreateWithoutUserInput> | BucketCreateWithoutUserInput[] | BucketUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BucketCreateOrConnectWithoutUserInput | BucketCreateOrConnectWithoutUserInput[]
-    upsert?: BucketUpsertWithWhereUniqueWithoutUserInput | BucketUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: BucketCreateManyUserInputEnvelope
-    set?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    disconnect?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    delete?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    connect?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    update?: BucketUpdateWithWhereUniqueWithoutUserInput | BucketUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: BucketUpdateManyWithWhereWithoutUserInput | BucketUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: BucketScalarWhereInput | BucketScalarWhereInput[]
   }
 
   export type ProductCreateNestedManyWithoutCategoryInput = {
@@ -13515,13 +12041,6 @@ export namespace Prisma {
     connect?: OrderProductWhereUniqueInput | OrderProductWhereUniqueInput[]
   }
 
-  export type BucketCreateNestedManyWithoutProductInput = {
-    create?: XOR<BucketCreateWithoutProductInput, BucketUncheckedCreateWithoutProductInput> | BucketCreateWithoutProductInput[] | BucketUncheckedCreateWithoutProductInput[]
-    connectOrCreate?: BucketCreateOrConnectWithoutProductInput | BucketCreateOrConnectWithoutProductInput[]
-    createMany?: BucketCreateManyProductInputEnvelope
-    connect?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-  }
-
   export type ImagesUncheckedCreateNestedManyWithoutProductInput = {
     create?: XOR<ImagesCreateWithoutProductInput, ImagesUncheckedCreateWithoutProductInput> | ImagesCreateWithoutProductInput[] | ImagesUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ImagesCreateOrConnectWithoutProductInput | ImagesCreateOrConnectWithoutProductInput[]
@@ -13534,13 +12053,6 @@ export namespace Prisma {
     connectOrCreate?: OrderProductCreateOrConnectWithoutProductInput | OrderProductCreateOrConnectWithoutProductInput[]
     createMany?: OrderProductCreateManyProductInputEnvelope
     connect?: OrderProductWhereUniqueInput | OrderProductWhereUniqueInput[]
-  }
-
-  export type BucketUncheckedCreateNestedManyWithoutProductInput = {
-    create?: XOR<BucketCreateWithoutProductInput, BucketUncheckedCreateWithoutProductInput> | BucketCreateWithoutProductInput[] | BucketUncheckedCreateWithoutProductInput[]
-    connectOrCreate?: BucketCreateOrConnectWithoutProductInput | BucketCreateOrConnectWithoutProductInput[]
-    createMany?: BucketCreateManyProductInputEnvelope
-    connect?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
   }
 
   export type CategoryUpdateOneRequiredWithoutProductsNestedInput = {
@@ -13579,20 +12091,6 @@ export namespace Prisma {
     deleteMany?: OrderProductScalarWhereInput | OrderProductScalarWhereInput[]
   }
 
-  export type BucketUpdateManyWithoutProductNestedInput = {
-    create?: XOR<BucketCreateWithoutProductInput, BucketUncheckedCreateWithoutProductInput> | BucketCreateWithoutProductInput[] | BucketUncheckedCreateWithoutProductInput[]
-    connectOrCreate?: BucketCreateOrConnectWithoutProductInput | BucketCreateOrConnectWithoutProductInput[]
-    upsert?: BucketUpsertWithWhereUniqueWithoutProductInput | BucketUpsertWithWhereUniqueWithoutProductInput[]
-    createMany?: BucketCreateManyProductInputEnvelope
-    set?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    disconnect?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    delete?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    connect?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    update?: BucketUpdateWithWhereUniqueWithoutProductInput | BucketUpdateWithWhereUniqueWithoutProductInput[]
-    updateMany?: BucketUpdateManyWithWhereWithoutProductInput | BucketUpdateManyWithWhereWithoutProductInput[]
-    deleteMany?: BucketScalarWhereInput | BucketScalarWhereInput[]
-  }
-
   export type ImagesUncheckedUpdateManyWithoutProductNestedInput = {
     create?: XOR<ImagesCreateWithoutProductInput, ImagesUncheckedCreateWithoutProductInput> | ImagesCreateWithoutProductInput[] | ImagesUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ImagesCreateOrConnectWithoutProductInput | ImagesCreateOrConnectWithoutProductInput[]
@@ -13619,20 +12117,6 @@ export namespace Prisma {
     update?: OrderProductUpdateWithWhereUniqueWithoutProductInput | OrderProductUpdateWithWhereUniqueWithoutProductInput[]
     updateMany?: OrderProductUpdateManyWithWhereWithoutProductInput | OrderProductUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: OrderProductScalarWhereInput | OrderProductScalarWhereInput[]
-  }
-
-  export type BucketUncheckedUpdateManyWithoutProductNestedInput = {
-    create?: XOR<BucketCreateWithoutProductInput, BucketUncheckedCreateWithoutProductInput> | BucketCreateWithoutProductInput[] | BucketUncheckedCreateWithoutProductInput[]
-    connectOrCreate?: BucketCreateOrConnectWithoutProductInput | BucketCreateOrConnectWithoutProductInput[]
-    upsert?: BucketUpsertWithWhereUniqueWithoutProductInput | BucketUpsertWithWhereUniqueWithoutProductInput[]
-    createMany?: BucketCreateManyProductInputEnvelope
-    set?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    disconnect?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    delete?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    connect?: BucketWhereUniqueInput | BucketWhereUniqueInput[]
-    update?: BucketUpdateWithWhereUniqueWithoutProductInput | BucketUpdateWithWhereUniqueWithoutProductInput[]
-    updateMany?: BucketUpdateManyWithWhereWithoutProductInput | BucketUpdateManyWithWhereWithoutProductInput[]
-    deleteMany?: BucketScalarWhereInput | BucketScalarWhereInput[]
   }
 
   export type ProductCreateNestedOneWithoutImagesInput = {
@@ -13689,34 +12173,6 @@ export namespace Prisma {
     update?: OrderUpdateWithWhereUniqueWithoutStatusInput | OrderUpdateWithWhereUniqueWithoutStatusInput[]
     updateMany?: OrderUpdateManyWithWhereWithoutStatusInput | OrderUpdateManyWithWhereWithoutStatusInput[]
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
-  }
-
-  export type ProductCreateNestedOneWithoutBucketsInput = {
-    create?: XOR<ProductCreateWithoutBucketsInput, ProductUncheckedCreateWithoutBucketsInput>
-    connectOrCreate?: ProductCreateOrConnectWithoutBucketsInput
-    connect?: ProductWhereUniqueInput
-  }
-
-  export type UserCreateNestedOneWithoutBucketsInput = {
-    create?: XOR<UserCreateWithoutBucketsInput, UserUncheckedCreateWithoutBucketsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutBucketsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type ProductUpdateOneRequiredWithoutBucketsNestedInput = {
-    create?: XOR<ProductCreateWithoutBucketsInput, ProductUncheckedCreateWithoutBucketsInput>
-    connectOrCreate?: ProductCreateOrConnectWithoutBucketsInput
-    upsert?: ProductUpsertWithoutBucketsInput
-    connect?: ProductWhereUniqueInput
-    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutBucketsInput, ProductUpdateWithoutBucketsInput>, ProductUncheckedUpdateWithoutBucketsInput>
-  }
-
-  export type UserUpdateOneRequiredWithoutBucketsNestedInput = {
-    create?: XOR<UserCreateWithoutBucketsInput, UserUncheckedCreateWithoutBucketsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutBucketsInput
-    upsert?: UserUpsertWithoutBucketsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBucketsInput, UserUpdateWithoutBucketsInput>, UserUncheckedUpdateWithoutBucketsInput>
   }
 
   export type ProductCreateNestedOneWithoutOrderProductsInput = {
@@ -13921,7 +12377,6 @@ export namespace Prisma {
     email: string
     password: string
     orders?: OrderCreateNestedManyWithoutOrdererInput
-    buckets?: BucketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -13931,7 +12386,6 @@ export namespace Prisma {
     email: string
     password: string
     orders?: OrderUncheckedCreateNestedManyWithoutOrdererInput
-    buckets?: BucketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -14009,27 +12463,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type BucketCreateWithoutUserInput = {
-    count: number
-    product: ProductCreateNestedOneWithoutBucketsInput
-  }
-
-  export type BucketUncheckedCreateWithoutUserInput = {
-    id?: number
-    productId: number
-    count: number
-  }
-
-  export type BucketCreateOrConnectWithoutUserInput = {
-    where: BucketWhereUniqueInput
-    create: XOR<BucketCreateWithoutUserInput, BucketUncheckedCreateWithoutUserInput>
-  }
-
-  export type BucketCreateManyUserInputEnvelope = {
-    data: BucketCreateManyUserInput | BucketCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type RoleUpsertWithoutUserInput = {
     update: XOR<RoleUpdateWithoutUserInput, RoleUncheckedUpdateWithoutUserInput>
     create: XOR<RoleCreateWithoutUserInput, RoleUncheckedCreateWithoutUserInput>
@@ -14076,32 +12509,6 @@ export namespace Prisma {
     statusId?: IntFilter<"Order"> | number
   }
 
-  export type BucketUpsertWithWhereUniqueWithoutUserInput = {
-    where: BucketWhereUniqueInput
-    update: XOR<BucketUpdateWithoutUserInput, BucketUncheckedUpdateWithoutUserInput>
-    create: XOR<BucketCreateWithoutUserInput, BucketUncheckedCreateWithoutUserInput>
-  }
-
-  export type BucketUpdateWithWhereUniqueWithoutUserInput = {
-    where: BucketWhereUniqueInput
-    data: XOR<BucketUpdateWithoutUserInput, BucketUncheckedUpdateWithoutUserInput>
-  }
-
-  export type BucketUpdateManyWithWhereWithoutUserInput = {
-    where: BucketScalarWhereInput
-    data: XOR<BucketUpdateManyMutationInput, BucketUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type BucketScalarWhereInput = {
-    AND?: BucketScalarWhereInput | BucketScalarWhereInput[]
-    OR?: BucketScalarWhereInput[]
-    NOT?: BucketScalarWhereInput | BucketScalarWhereInput[]
-    id?: IntFilter<"Bucket"> | number
-    productId?: IntFilter<"Bucket"> | number
-    userBucket?: IntFilter<"Bucket"> | number
-    count?: IntFilter<"Bucket"> | number
-  }
-
   export type ProductCreateWithoutCategoryInput = {
     name: string
     description: string
@@ -14109,7 +12516,6 @@ export namespace Prisma {
     count: number
     images?: ImagesCreateNestedManyWithoutProductInput
     orderProducts?: OrderProductCreateNestedManyWithoutProductInput
-    buckets?: BucketCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutCategoryInput = {
@@ -14120,7 +12526,6 @@ export namespace Prisma {
     count: number
     images?: ImagesUncheckedCreateNestedManyWithoutProductInput
     orderProducts?: OrderProductUncheckedCreateNestedManyWithoutProductInput
-    buckets?: BucketUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutCategoryInput = {
@@ -14215,27 +12620,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type BucketCreateWithoutProductInput = {
-    count: number
-    user: UserCreateNestedOneWithoutBucketsInput
-  }
-
-  export type BucketUncheckedCreateWithoutProductInput = {
-    id?: number
-    userBucket: number
-    count: number
-  }
-
-  export type BucketCreateOrConnectWithoutProductInput = {
-    where: BucketWhereUniqueInput
-    create: XOR<BucketCreateWithoutProductInput, BucketUncheckedCreateWithoutProductInput>
-  }
-
-  export type BucketCreateManyProductInputEnvelope = {
-    data: BucketCreateManyProductInput | BucketCreateManyProductInput[]
-    skipDuplicates?: boolean
-  }
-
   export type CategoryUpsertWithoutProductsInput = {
     update: XOR<CategoryUpdateWithoutProductsInput, CategoryUncheckedUpdateWithoutProductsInput>
     create: XOR<CategoryCreateWithoutProductsInput, CategoryUncheckedCreateWithoutProductsInput>
@@ -14307,22 +12691,6 @@ export namespace Prisma {
     count?: IntFilter<"OrderProduct"> | number
   }
 
-  export type BucketUpsertWithWhereUniqueWithoutProductInput = {
-    where: BucketWhereUniqueInput
-    update: XOR<BucketUpdateWithoutProductInput, BucketUncheckedUpdateWithoutProductInput>
-    create: XOR<BucketCreateWithoutProductInput, BucketUncheckedCreateWithoutProductInput>
-  }
-
-  export type BucketUpdateWithWhereUniqueWithoutProductInput = {
-    where: BucketWhereUniqueInput
-    data: XOR<BucketUpdateWithoutProductInput, BucketUncheckedUpdateWithoutProductInput>
-  }
-
-  export type BucketUpdateManyWithWhereWithoutProductInput = {
-    where: BucketScalarWhereInput
-    data: XOR<BucketUpdateManyMutationInput, BucketUncheckedUpdateManyWithoutProductInput>
-  }
-
   export type ProductCreateWithoutImagesInput = {
     name: string
     description: string
@@ -14330,7 +12698,6 @@ export namespace Prisma {
     count: number
     category: CategoryCreateNestedOneWithoutProductsInput
     orderProducts?: OrderProductCreateNestedManyWithoutProductInput
-    buckets?: BucketCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutImagesInput = {
@@ -14341,7 +12708,6 @@ export namespace Prisma {
     categoryId: number
     count: number
     orderProducts?: OrderProductUncheckedCreateNestedManyWithoutProductInput
-    buckets?: BucketUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutImagesInput = {
@@ -14367,7 +12733,6 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     category?: CategoryUpdateOneRequiredWithoutProductsNestedInput
     orderProducts?: OrderProductUpdateManyWithoutProductNestedInput
-    buckets?: BucketUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutImagesInput = {
@@ -14378,7 +12743,6 @@ export namespace Prisma {
     categoryId?: IntFieldUpdateOperationsInput | number
     count?: IntFieldUpdateOperationsInput | number
     orderProducts?: OrderProductUncheckedUpdateManyWithoutProductNestedInput
-    buckets?: BucketUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type OrderCreateWithoutStatusInput = {
@@ -14420,118 +12784,6 @@ export namespace Prisma {
     data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutStatusInput>
   }
 
-  export type ProductCreateWithoutBucketsInput = {
-    name: string
-    description: string
-    price: number
-    count: number
-    category: CategoryCreateNestedOneWithoutProductsInput
-    images?: ImagesCreateNestedManyWithoutProductInput
-    orderProducts?: OrderProductCreateNestedManyWithoutProductInput
-  }
-
-  export type ProductUncheckedCreateWithoutBucketsInput = {
-    id?: number
-    name: string
-    description: string
-    price: number
-    categoryId: number
-    count: number
-    images?: ImagesUncheckedCreateNestedManyWithoutProductInput
-    orderProducts?: OrderProductUncheckedCreateNestedManyWithoutProductInput
-  }
-
-  export type ProductCreateOrConnectWithoutBucketsInput = {
-    where: ProductWhereUniqueInput
-    create: XOR<ProductCreateWithoutBucketsInput, ProductUncheckedCreateWithoutBucketsInput>
-  }
-
-  export type UserCreateWithoutBucketsInput = {
-    name: string
-    surname: string
-    email: string
-    password: string
-    role: RoleCreateNestedOneWithoutUserInput
-    orders?: OrderCreateNestedManyWithoutOrdererInput
-  }
-
-  export type UserUncheckedCreateWithoutBucketsInput = {
-    id?: number
-    name: string
-    surname: string
-    email: string
-    password: string
-    roleId: number
-    orders?: OrderUncheckedCreateNestedManyWithoutOrdererInput
-  }
-
-  export type UserCreateOrConnectWithoutBucketsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutBucketsInput, UserUncheckedCreateWithoutBucketsInput>
-  }
-
-  export type ProductUpsertWithoutBucketsInput = {
-    update: XOR<ProductUpdateWithoutBucketsInput, ProductUncheckedUpdateWithoutBucketsInput>
-    create: XOR<ProductCreateWithoutBucketsInput, ProductUncheckedCreateWithoutBucketsInput>
-    where?: ProductWhereInput
-  }
-
-  export type ProductUpdateToOneWithWhereWithoutBucketsInput = {
-    where?: ProductWhereInput
-    data: XOR<ProductUpdateWithoutBucketsInput, ProductUncheckedUpdateWithoutBucketsInput>
-  }
-
-  export type ProductUpdateWithoutBucketsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
-    count?: IntFieldUpdateOperationsInput | number
-    category?: CategoryUpdateOneRequiredWithoutProductsNestedInput
-    images?: ImagesUpdateManyWithoutProductNestedInput
-    orderProducts?: OrderProductUpdateManyWithoutProductNestedInput
-  }
-
-  export type ProductUncheckedUpdateWithoutBucketsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: IntFieldUpdateOperationsInput | number
-    categoryId?: IntFieldUpdateOperationsInput | number
-    count?: IntFieldUpdateOperationsInput | number
-    images?: ImagesUncheckedUpdateManyWithoutProductNestedInput
-    orderProducts?: OrderProductUncheckedUpdateManyWithoutProductNestedInput
-  }
-
-  export type UserUpsertWithoutBucketsInput = {
-    update: XOR<UserUpdateWithoutBucketsInput, UserUncheckedUpdateWithoutBucketsInput>
-    create: XOR<UserCreateWithoutBucketsInput, UserUncheckedCreateWithoutBucketsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutBucketsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutBucketsInput, UserUncheckedUpdateWithoutBucketsInput>
-  }
-
-  export type UserUpdateWithoutBucketsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    surname?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: RoleUpdateOneRequiredWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutOrdererNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutBucketsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    surname?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    roleId?: IntFieldUpdateOperationsInput | number
-    orders?: OrderUncheckedUpdateManyWithoutOrdererNestedInput
-  }
-
   export type ProductCreateWithoutOrderProductsInput = {
     name: string
     description: string
@@ -14539,7 +12791,6 @@ export namespace Prisma {
     count: number
     category: CategoryCreateNestedOneWithoutProductsInput
     images?: ImagesCreateNestedManyWithoutProductInput
-    buckets?: BucketCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutOrderProductsInput = {
@@ -14550,7 +12801,6 @@ export namespace Prisma {
     categoryId: number
     count: number
     images?: ImagesUncheckedCreateNestedManyWithoutProductInput
-    buckets?: BucketUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutOrderProductsInput = {
@@ -14594,7 +12844,6 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     category?: CategoryUpdateOneRequiredWithoutProductsNestedInput
     images?: ImagesUpdateManyWithoutProductNestedInput
-    buckets?: BucketUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutOrderProductsInput = {
@@ -14605,7 +12854,6 @@ export namespace Prisma {
     categoryId?: IntFieldUpdateOperationsInput | number
     count?: IntFieldUpdateOperationsInput | number
     images?: ImagesUncheckedUpdateManyWithoutProductNestedInput
-    buckets?: BucketUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type OrderUpsertWithoutOrderProductsInput = {
@@ -14652,7 +12900,6 @@ export namespace Prisma {
     email: string
     password: string
     role: RoleCreateNestedOneWithoutUserInput
-    buckets?: BucketCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOrdersInput = {
@@ -14662,7 +12909,6 @@ export namespace Prisma {
     email: string
     password: string
     roleId: number
-    buckets?: BucketUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOrdersInput = {
@@ -14728,7 +12974,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: RoleUpdateOneRequiredWithoutUserNestedInput
-    buckets?: BucketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -14738,7 +12983,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     roleId?: IntFieldUpdateOperationsInput | number
-    buckets?: BucketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type OrderProductUpsertWithWhereUniqueWithoutOrderInput = {
@@ -14771,7 +13015,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     orders?: OrderUpdateManyWithoutOrdererNestedInput
-    buckets?: BucketUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -14781,7 +13024,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     orders?: OrderUncheckedUpdateManyWithoutOrdererNestedInput
-    buckets?: BucketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutRoleInput = {
@@ -14796,12 +13038,6 @@ export namespace Prisma {
     id?: number
     createdAt?: Date | string
     statusId: number
-  }
-
-  export type BucketCreateManyUserInput = {
-    id?: number
-    productId: number
-    count: number
   }
 
   export type OrderUpdateWithoutOrdererInput = {
@@ -14823,23 +13059,6 @@ export namespace Prisma {
     statusId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type BucketUpdateWithoutUserInput = {
-    count?: IntFieldUpdateOperationsInput | number
-    product?: ProductUpdateOneRequiredWithoutBucketsNestedInput
-  }
-
-  export type BucketUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    productId?: IntFieldUpdateOperationsInput | number
-    count?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type BucketUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    productId?: IntFieldUpdateOperationsInput | number
-    count?: IntFieldUpdateOperationsInput | number
-  }
-
   export type ProductCreateManyCategoryInput = {
     id?: number
     name: string
@@ -14855,7 +13074,6 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     images?: ImagesUpdateManyWithoutProductNestedInput
     orderProducts?: OrderProductUpdateManyWithoutProductNestedInput
-    buckets?: BucketUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutCategoryInput = {
@@ -14866,7 +13084,6 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     images?: ImagesUncheckedUpdateManyWithoutProductNestedInput
     orderProducts?: OrderProductUncheckedUpdateManyWithoutProductNestedInput
-    buckets?: BucketUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutCategoryInput = {
@@ -14885,12 +13102,6 @@ export namespace Prisma {
   export type OrderProductCreateManyProductInput = {
     id?: number
     orderId: number
-    count: number
-  }
-
-  export type BucketCreateManyProductInput = {
-    id?: number
-    userBucket: number
     count: number
   }
 
@@ -14922,23 +13133,6 @@ export namespace Prisma {
   export type OrderProductUncheckedUpdateManyWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: IntFieldUpdateOperationsInput | number
-    count?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type BucketUpdateWithoutProductInput = {
-    count?: IntFieldUpdateOperationsInput | number
-    user?: UserUpdateOneRequiredWithoutBucketsNestedInput
-  }
-
-  export type BucketUncheckedUpdateWithoutProductInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    userBucket?: IntFieldUpdateOperationsInput | number
-    count?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type BucketUncheckedUpdateManyWithoutProductInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    userBucket?: IntFieldUpdateOperationsInput | number
     count?: IntFieldUpdateOperationsInput | number
   }
 

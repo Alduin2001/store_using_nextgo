@@ -31,7 +31,6 @@ model User{
   // Связи
   role Role @relation(fields: [roleId],references: [id],onDelete: Cascade)
   orders Order[]
-  buckets Bucket[]
 }
 
 model Category{
@@ -52,8 +51,6 @@ model Product{
   category Category @relation(fields: [categoryId],references: [id],onDelete: Cascade)
   images Images[]
   orderProducts OrderProduct[]
-  buckets Bucket[]
-
 }
 
 model Images{
@@ -69,16 +66,6 @@ model Status{
   name String
   // Связи
   orders Order[]
-}
-
-model Bucket{
-  id Int @id @default(autoincrement())
-  productId Int
-  userBucket Int
-  count Int
-  // Связи
-  product Product @relation(fields: [productId],references: [id],onDelete: Cascade)
-  user User @relation(fields: [userBucket],references: [id],onDelete: Cascade)
 }
 
 model OrderProduct{

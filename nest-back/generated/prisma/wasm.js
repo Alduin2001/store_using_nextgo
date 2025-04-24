@@ -156,13 +156,6 @@ exports.Prisma.StatusScalarFieldEnum = {
   name: 'name'
 };
 
-exports.Prisma.BucketScalarFieldEnum = {
-  id: 'id',
-  productId: 'productId',
-  userBucket: 'userBucket',
-  count: 'count'
-};
-
 exports.Prisma.OrderProductScalarFieldEnum = {
   id: 'id',
   productId: 'productId',
@@ -195,7 +188,6 @@ exports.Prisma.ModelName = {
   Product: 'Product',
   Images: 'Images',
   Status: 'Status',
-  Bucket: 'Bucket',
   OrderProduct: 'OrderProduct',
   Order: 'Order'
 };
