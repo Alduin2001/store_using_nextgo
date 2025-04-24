@@ -1,0 +1,6 @@
+/nest-back/node_modules
+/nest-back/dist
+/data
+
+/frontend/node_modules
+/frontend/.next
