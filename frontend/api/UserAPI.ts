@@ -43,6 +43,15 @@ export default class UserAPI{
             return error           
         }
     }
+    // Запрос на отправку удаления профиля
+    static async removeProfile():Promise<any>{
+        try {
+            const response = await apiClient.delete('/removeProfile');
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    }
     static async logout():Promise<any> {
         try {
             const response = await apiClient.post('/auth/logout',{});

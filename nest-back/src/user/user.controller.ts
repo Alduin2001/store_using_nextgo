@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, UseGuards, Req } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { UserI } from 'src/interfaces/UserI';
 
 @Controller('user')
 export class UserController {
@@ -21,6 +23,7 @@ export class UserController {
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
   }
+  
   @Patch('/verify/:token')
   verify(@Param('token') token:string){
     return this.userService.verifyUser(token);
@@ -29,8 +32,11 @@ export class UserController {
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(+id, updateUserDto);
   }
-
-  @Delete(':id')
+  @Delete('/removeProfile')
+  removeProfile(@Req() req:UserI){
+    return this.userService.deleteProfile(req.user.id);
+  }
+  @Delete('/removeUser/:id')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }

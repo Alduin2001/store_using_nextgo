@@ -50,12 +50,4 @@ export class AuthService {
       throw new InternalServerErrorException('Ошибка на сервере');
     }
   }
-  async deleteProfile(userId:number){
-    try {
-      const deletedProfile = await this.prisma.user.delete({where:{id:userId}});
-      
-    } catch (error) {
-      
-    }
-  }
 }

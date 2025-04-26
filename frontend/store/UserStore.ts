@@ -6,6 +6,16 @@ import { UserStoreI } from "@/interfaces/store_int/UserStoreI";
 export const useUserStore = create<UserStoreI>((set)=>({
     isAuth:false,
     role:0,
+    isOpenDeleteProfile:false,
+    openModalProfileDelete:()=>{
+        set({isOpenDeleteProfile:true});
+    },
+    closeModalProfileDelete:()=>{
+        set({isOpenDeleteProfile:false});
+    },
+    removeProfile:async ()=>{
+        
+    },
     setIsAuth:(data)=>{
         set({isAuth:data});
     },

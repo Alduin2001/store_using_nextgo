@@ -81,6 +81,15 @@ export class UserService {
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
+  // Сервис для удаления профиля
+  async deleteProfile(userId:number){
+    try {
+      const deletedProfile = await this.prisma.user.delete({where:{id:userId}});
+      return HttpStatus.OK;
+    } catch (error) {
+      throw new InternalServerErrorException('Ошибка сервера',error);
+    }
+  }
 
   remove(id: number) {
     return `This action removes a #${id} user`;

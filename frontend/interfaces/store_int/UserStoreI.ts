@@ -3,7 +3,11 @@ import { CreateUserDto, LoginUserDto } from "../dto/user.dto";
 export interface UserStoreI{
     isAuth:boolean,
     role:number,
+    isOpenDeleteProfile:boolean,
     registerUser:(data:CreateUserDto)=>Promise<void>,
+    removeProfile:()=>void,
+    openModalProfileDelete:()=>void,
+    closeModalProfileDelete:()=>void,
     loginUser:(data:LoginUserDto)=>Promise<any>,
     setIsAuth:(state:boolean)=>void,
     checkAuth:()=>Promise<void>,

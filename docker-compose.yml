@@ -11,3 +11,17 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
     restart: unless-stopped
+
+  postgres:
+    image: postgres
+    container_name: postgres_cont
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: postgres
+      # Правильно укажите внутренний путь в контейнере
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5430:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
