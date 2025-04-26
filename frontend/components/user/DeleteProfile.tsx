@@ -1,14 +1,20 @@
+'use client'
 import { useUserStore } from "@/store/UserStore";
 import { Dialog, DialogPanel, DialogTitle,Description } from "@headlessui/react";
 import { FC } from "react";
-
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export const DeleteModalProfile:FC = ()=>{
-
+    const router = useRouter();
     const {isOpenDeleteProfile,closeModalProfileDelete,removeProfile} = useUserStore();
 
     const handleDelete = async ()=>{
-        
+        await removeProfile()
+        .then(()=>{
+          toast.error('Учётная запись удалена');
+          router.push('/login');
+        })
     }
     return(
         <Dialog

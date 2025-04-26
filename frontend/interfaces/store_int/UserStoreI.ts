@@ -5,7 +5,7 @@ export interface UserStoreI{
     role:number,
     isOpenDeleteProfile:boolean,
     registerUser:(data:CreateUserDto)=>Promise<void>,
-    removeProfile:()=>void,
+    removeProfile:()=>Promise<any>,
     openModalProfileDelete:()=>void,
     closeModalProfileDelete:()=>void,
     loginUser:(data:LoginUserDto)=>Promise<any>,

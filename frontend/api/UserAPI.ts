@@ -46,7 +46,8 @@ export default class UserAPI{
     // Запрос на отправку удаления профиля
     static async removeProfile():Promise<any>{
         try {
-            const response = await apiClient.delete('/removeProfile');
+            console.log('Отправляю запрос на удаление профиля');
+            const response = await apiClient.post('/user/removeProfile');
             return response;
         } catch (error) {
             throw error;

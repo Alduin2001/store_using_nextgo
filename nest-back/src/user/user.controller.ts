@@ -28,11 +28,13 @@ export class UserController {
   verify(@Param('token') token:string){
     return this.userService.verifyUser(token);
   }
-  @Patch('/update/:id')
+  @Patch('update/:id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(+id, updateUserDto);
   }
-  @Delete('/removeProfile')
+  
+  @UseGuards(AuthGuard('jwt'))
+  @Post('/removeProfile')
   removeProfile(@Req() req:UserI){
     return this.userService.deleteProfile(req.user.id);
   }

@@ -14,7 +14,9 @@ export const useUserStore = create<UserStoreI>((set)=>({
         set({isOpenDeleteProfile:false});
     },
     removeProfile:async ()=>{
-        
+        const response = await UserAPI.removeProfile();
+        set({isOpenDeleteProfile:false});
+        console.log(response);
     },
     setIsAuth:(data)=>{
         set({isAuth:data});
