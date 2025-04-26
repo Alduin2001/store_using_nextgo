@@ -8,6 +8,8 @@ import { Row } from "../ui/grid/Row";
 import { CreateUserDto } from "@/interfaces/dto/user.dto";
 import { useUserStore } from "@/store/UserStore";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { toast } from "react-toastify";
 
 export const RegisterComp:FC = ()=>{
     const router = useRouter();
@@ -19,6 +21,7 @@ export const RegisterComp:FC = ()=>{
     const submitForm = async (data:CreateUserDto)=>{
         await registerUser(data)
         .then(()=>{
+            toast.success('Подтвердите почту');
             router.push('/login');
         });
     }
@@ -48,6 +51,7 @@ export const RegisterComp:FC = ()=>{
                 <Button className="w-full bg-green-500 p-2 rounded cursor-pointer" type="submit">Зарегистрироваться</Button>
                 <Button className="w-full bg-red-500 p-2 rounded cursor-pointer" onClick={()=>reset()}>Очистить</Button>
             </Row>
+            <p className="text-xl mt-2">У вас уже есть учётная запись? <span><Link className="text-blue-500" href="/login">Войти</Link></span></p>
         </form>
     )
 }

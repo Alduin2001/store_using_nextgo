@@ -19,6 +19,14 @@ export default class UserAPI{
             return error;
         }
     }
+    static async verify(token:string):Promise<any>{
+        try {
+            const response = await apiClient.patch(`/user/verify/${token}`,{});
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    }
     static async getProfile():Promise<any>{
         try {
             const response = await apiClient.get('/auth/profile');

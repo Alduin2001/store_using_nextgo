@@ -50,6 +50,7 @@ export const Header:FC = ()=>{
                 (<Menu>
                     <MenuButton className="bg-amber-500 p-2 rounded cursor-pointer">Личный кабинет</MenuButton>
                     <MenuItems anchor="bottom start" className="flex flex-col">
+                    <MenuItem as={Link} href="/private/cart" className="bg-amber-500 p-2 text-[#eee] transition hover:bg-amber-400 rounded cursor-pointer">Корзина</MenuItem>
                     <MenuItem as={Link} href="/private/profile" className="bg-amber-500 p-2 text-[#eee] transition hover:bg-amber-400 rounded cursor-pointer">Профиль</MenuItem>
                         <MenuItem as={Button} onClick={logout} className="bg-amber-500 p-2 text-[#eee] transition hover:bg-amber-400 rounded cursor-pointer">Выход</MenuItem>
                     </MenuItems>

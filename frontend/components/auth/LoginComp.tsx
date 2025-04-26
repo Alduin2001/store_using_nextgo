@@ -9,6 +9,7 @@ import { LoginUserDto } from "@/interfaces/dto/user.dto";
 import { useUserStore } from "@/store/UserStore";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 export const LoginComp:FC = ()=>{
     const router = useRouter();
@@ -42,6 +43,7 @@ export const LoginComp:FC = ()=>{
                 <Button className="w-full bg-green-500 p-2 rounded cursor-pointer" type="submit" disabled={!isValid && true}>Войти</Button>
                 <Button className="w-full bg-red-500 p-2 rounded cursor-pointer" onClick={()=>reset()}>Очистить</Button>
             </Row>
+            <p className="text-xl mt-2">Нет учётной записи? <span><Link className="text-blue-500" href="/register">Зарегистрироваться</Link></span></p>
         </form>
     )
 }

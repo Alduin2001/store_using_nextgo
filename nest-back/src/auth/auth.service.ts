@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { BadRequestException, HttpStatus, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { PrismaService } from 'src/config/prisma.service';
@@ -16,7 +16,7 @@ export class AuthService {
   async login(createAuthDto: CreateAuthDto) {
     try {
       const {email,password} = createAuthDto;
-      const finded = await this.prisma.user.findUnique({where:{email}});
+      const finded = await this.prisma.user.findUnique({where:{email,isVerified:true}});
       if(!finded){
         throw new BadRequestException('Пользователь не найден');
       }
@@ -38,7 +38,6 @@ export class AuthService {
       throw new BadRequestException(error);
     }
   }
-
   async getProfile(id:number) {
     try {
       const profile = await this.prisma.user.findFirst({where:{id},select:{
@@ -49,6 +48,14 @@ export class AuthService {
       return {profile};
     } catch (error) {
       throw new InternalServerErrorException('Ошибка на сервере');
+    }
+  }
+  async deleteProfile(userId:number){
+    try {
+      const deletedProfile = await this.prisma.user.delete({where:{id:userId}});
+      
+    } catch (error) {
+      
     }
   }
 }

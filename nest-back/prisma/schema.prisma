@@ -28,9 +28,22 @@ model User{
   email String @unique
   password String
   roleId Int
+  isVerified Boolean @default(false)
   // Связи
   role Role @relation(fields: [roleId],references: [id],onDelete: Cascade)
   orders Order[]
+  verify Verify[]
+  @@index([email])
+  @@index([isVerified])
+}
+
+model Verify{
+  id Int @id @default(autoincrement())
+  userId Int
+  token String @unique
+  // Связи
+  user User @relation(fields: [userId],references: [id],onDelete: Cascade)
+  @@index([userId])
 }
 
 model Category{

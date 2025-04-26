@@ -13,9 +13,26 @@ import { join } from 'path';
 import { OrderModule } from './order/order.module';
 import { CartModule } from './cart/cart.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { MailSendService } from './mail-send/mail-send.service';
 
 @Module({
   imports: [
+    MailerModule.forRootAsync({
+      imports:[ConfigModule],
+      useFactory:async (configService:ConfigService)=>({
+        transport:{
+          host:configService.get('MAIL_HOST'),
+          port:587,
+          secure:false,
+          auth:{
+            user:configService.get('MAIL_USER'),
+            pass:configService.get('MAIL_PASSWORD')
+          }
+        }
+      }),
+      inject:[ConfigService]
+    }),
     ServeStaticModule.forRoot({
       rootPath:join(__dirname,'..','uploads')
     }),
@@ -39,7 +56,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     }),
     UserModule, CategoryModule, ProductModule, AuthModule, RoleModule, OrderModule, CartModule],
   controllers: [],
-  providers: [JwtStrategy],
-  exports:[JwtModule]
+  providers: [JwtStrategy, MailSendService],
+  exports:[JwtModule,MailSendService]
 })
 export class AppModule {}

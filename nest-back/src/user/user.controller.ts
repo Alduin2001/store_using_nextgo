@@ -21,8 +21,11 @@ export class UserController {
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
   }
-
-  @Patch(':id')
+  @Patch('/verify/:token')
+  verify(@Param('token') token:string){
+    return this.userService.verifyUser(token);
+  }
+  @Patch('/update/:id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(+id, updateUserDto);
   }

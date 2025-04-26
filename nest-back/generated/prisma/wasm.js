@@ -128,7 +128,14 @@ exports.Prisma.UserScalarFieldEnum = {
   surname: 'surname',
   email: 'email',
   password: 'password',
-  roleId: 'roleId'
+  roleId: 'roleId',
+  isVerified: 'isVerified'
+};
+
+exports.Prisma.VerifyScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
@@ -184,6 +191,7 @@ exports.Prisma.QueryMode = {
 exports.Prisma.ModelName = {
   Role: 'Role',
   User: 'User',
+  Verify: 'Verify',
   Category: 'Category',
   Product: 'Product',
   Images: 'Images',

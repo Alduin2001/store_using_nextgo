@@ -11,9 +11,10 @@ import { useUserStore } from "@/store/UserStore";
 import { Row } from "../ui/grid/Row";
 import { useProductStore } from "@/store/ProductStore";
 import { DeleteProductModal } from "./DeleteModal";
+import Link from "next/link";
 
 export const ProductItem:FC<ProductModel> = ({id,name,description,images,price,category,count})=>{
-    const {role} = useUserStore();
+    const {role,isAuth} = useUserStore();
     const {isOpenDelete,openDeleteModal} = useProductStore();
     
     return(
@@ -28,15 +29,21 @@ export const ProductItem:FC<ProductModel> = ({id,name,description,images,price,c
                 <p>Осталось {count}</p>
             </CardBody>
             <CardFooter>
+                {
+                    isAuth ?
                 <Row min="100px" gap={2}>
-                <Button className="p-2 text-xl transition bg-green-500 hover:bg-green-700 text-[#eee] rounded-md cursor-pointer">Заказать</Button>
+                <Button className="p-2 text-xl transition bg-blue-500 hover:bg-blue-700 text-[#eee] rounded-md cursor-pointer">В корзину</Button>
                 {
                     role==2 && (
                         <Button className="bg-red-600 transition hover:bg-red-700 cursor-pointer p-2 text-[#eee] rounded-md" onClick={()=>openDeleteModal(id)}>Удалить</Button>
                     )
                 }
                 </Row>
+                :
+                <Link href="/login" className="p-2 text-xl transition bg-blue-500 hover:bg-blue-700 text-[#eee] rounded-md cursor-pointer">В корзину</Link>
+}
             </CardFooter>
+
             {isOpenDelete && <DeleteProductModal/>}
         </Card>
     )
