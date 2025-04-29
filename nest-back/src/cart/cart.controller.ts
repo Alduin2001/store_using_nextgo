@@ -26,7 +26,7 @@ export class CartController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Patch(':id')
+  @Patch('/update_count/:id')
   update(@Param('id') id: string, @Body() updateCartDto: UpdateCartDto,@Req() req:UserI) {
     return this.cartService.update(+id, updateCartDto,req.user.id);
   }
